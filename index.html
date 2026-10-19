@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Bitworld ($BTW)</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#05050a;--bg2:#0a0a12;--card:rgba(255,255,255,.04);--border:rgba(255,255,255,.09);
-  --text:#f1f5f9;--muted:#94a3b8;--blue:#0ea5e9;--green:#22c55e;
-  --grad:linear-gradient(135deg,#0ea5e9,#22c55e);
-  --font:'Inter',system-ui,sans-serif;--disp:'Orbitron',sans-serif;
+  --bg:#0f1419;
+  --bg2:#161b22;
+  --card:rgba(255,255,255,0.08);
+  --border:rgba(255,255,255,0.14);
+  --text:#f0f4f8;
+  --muted:#a0aec0;
+  --blue:#38bdf8;
+  --green:#4ade80;
+  --grad:linear-gradient(135deg,#38bdf8,#4ade80);
+  --font:'Inter',system-ui,sans-serif;
+  --disp:'Orbitron',sans-serif;
 }
 html{scroll-behavior:smooth}
 body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh;overflow-x:hidden}
@@ -19,164 +26,239 @@ a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 input{font-family:inherit}
 
-/* TOPBAR */
 .topbar{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  height:56px;background:rgba(5,5,10,.95);backdrop-filter:blur(12px);
+  height:56px;background:rgba(15,20,25,0.95);backdrop-filter:blur(12px);
   border-bottom:1px solid var(--border);
   display:flex;align-items:center;justify-content:space-between;padding:0 16px;
 }
 .logo{display:flex;align-items:center;gap:8px;font-family:var(--disp);font-weight:700;font-size:1.05rem}
-.logo-i{width:28px;height:28px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:.65rem;color:#05050a;font-weight:800}
-.ham{width:36px;height:36px;border-radius:10px;background:var(--card);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
-.ham span{display:block;width:16px;height:2px;background:var(--text);border-radius:2px;transition:.25s}
+.logo-i{
+  width:28px;height:28px;border-radius:50%;background:var(--grad);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.65rem;color:#0f1419;font-weight:800;
+}
+.ham{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--card);border:1px solid var(--border);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+}
+.ham span{display:block;width:16px;height:2px;background:var(--text);border-radius:2px;transition:0.25s}
 .ham.on span:nth-child(1){transform:translateY(6px) rotate(45deg)}
 .ham.on span:nth-child(2){opacity:0}
 .ham.on span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
 
-/* SIDE MENU */
-.ov{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:90;opacity:0;pointer-events:none;transition:.3s}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:90;opacity:0;pointer-events:none;transition:0.3s}
 .ov.on{opacity:1;pointer-events:auto}
 .side{
   position:fixed;top:56px;right:0;bottom:0;width:270px;background:var(--bg2);
-  border-left:1px solid var(--border);z-index:95;transform:translateX(100%);transition:transform .3s;overflow-y:auto;padding:16px 0;
+  border-left:1px solid var(--border);z-index:95;
+  transform:translateX(100%);transition:transform 0.3s;overflow-y:auto;padding:16px 0;
 }
 .side.on{transform:translateX(0)}
 .side-user{padding:0 16px 16px;border-bottom:1px solid var(--border);margin-bottom:8px}
-.side-user .av{width:44px;height:44px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:700;color:#05050a;margin-bottom:8px}
-.side-user .nm{font-weight:600;font-size:.92rem}
-.side-user .ad{font-size:.72rem;color:var(--muted)}
-.sl{display:flex;align-items:center;gap:12px;padding:12px 16px;font-size:.9rem;color:var(--muted);width:100%;text-align:left}
-.sl:active,.sl:hover{color:var(--text);background:rgba(14,165,233,.08)}
+.side-user .av{
+  width:44px;height:44px;border-radius:50%;background:var(--grad);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;color:#0f1419;margin-bottom:8px;
+}
+.side-user .nm{font-weight:600;font-size:0.92rem}
+.side-user .ad{font-size:0.72rem;color:var(--muted)}
+.sl{
+  display:flex;align-items:center;gap:12px;padding:12px 16px;
+  font-size:0.9rem;color:var(--muted);width:100%;text-align:left;
+}
+.sl:hover{color:var(--text);background:rgba(56,189,248,0.08)}
 .sl .ic{width:22px;text-align:center}
 .sd{height:1px;background:var(--border);margin:8px 16px}
 
-/* BOTTOM NAV */
 .bot{
   position:fixed;bottom:0;left:0;right:0;z-index:100;height:58px;
-  background:rgba(5,5,10,.96);backdrop-filter:blur(12px);border-top:1px solid var(--border);
+  background:rgba(15,20,25,0.96);backdrop-filter:blur(12px);
+  border-top:1px solid var(--border);
   display:flex;align-items:center;justify-content:space-around;
 }
-.bi{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 10px;color:var(--muted);font-size:.65rem;font-weight:500}
+.bi{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:6px 10px;color:var(--muted);font-size:0.65rem;font-weight:500;
+}
 .bi .ic{font-size:1.2rem}
 .bi.on{color:var(--blue)}
 
-/* PAGES - only one visible */
 .pg{display:none;padding:68px 16px 70px;max-width:480px;margin:0 auto;min-height:100vh}
 .pg.on{display:block}
 .pt{font-size:1.3rem;font-weight:700;margin-bottom:4px}
-.ps{font-size:.84rem;color:var(--muted);margin-bottom:18px}
+.ps{font-size:0.84rem;color:var(--muted);margin-bottom:18px}
 
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px}
-.ct{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.ct{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
 
-.btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:12px 18px;border-radius:10px;font-weight:600;font-size:.9rem;width:100%}
-.bp{background:var(--grad);color:#05050a;box-shadow:0 2px 12px rgba(14,165,233,.3)}
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  padding:12px 18px;border-radius:10px;font-weight:600;font-size:0.9rem;width:100%;
+}
+.bp{background:var(--grad);color:#0f1419;box-shadow:0 2px 12px rgba(56,189,248,0.3)}
 .bo{background:transparent;border:1px solid var(--border);color:var(--text)}
-.bs{padding:8px 14px;font-size:.8rem;width:auto}
+.bs{padding:8px 14px;font-size:0.8rem;width:auto}
 .br{display:flex;gap:10px;margin-top:12px}
 .br .btn{flex:1}
 
 .sg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
 .sb{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
 .sb .v{font-family:var(--disp);font-size:1.1rem;font-weight:700;color:var(--blue)}
-.sb .l{font-size:.7rem;color:var(--muted);margin-top:2px}
+.sb .l{font-size:0.7rem;color:var(--muted);margin-top:2px}
 
-/* HOME */
-.coin{width:100px;height:100px;border-radius:50%;background:linear-gradient(145deg,#0c4a6e,#0ea5e9 50%,#22c55e);box-shadow:0 0 30px rgba(14,165,233,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 16px;animation:fl 4s ease-in-out infinite}
+.coin{
+  width:100px;height:100px;border-radius:50%;
+  background:linear-gradient(145deg,#0369a1,#38bdf8 50%,#4ade80);
+  box-shadow:0 0 30px rgba(56,189,248,0.3);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  margin:0 auto 16px;animation:fl 4s ease-in-out infinite;
+}
 .coin span:first-child{font-family:var(--disp);font-size:1.4rem;font-weight:700;color:#fff}
-.coin span:last-child{font-size:.5rem;letter-spacing:1.5px;color:rgba(255,255,255,.8)}
+.coin span:last-child{font-size:0.5rem;letter-spacing:1.5px;color:rgba(255,255,255,0.8)}
 @keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .ht{text-align:center;font-size:1.5rem;font-weight:800;margin-bottom:6px}
 .ht span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hd{text-align:center;color:var(--muted);font-size:.88rem;margin-bottom:16px}
-.ca{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-top:14px}
-.ca .t{flex:1;font-family:monospace;font-size:.68rem;color:var(--blue);word-break:break-all}
+.hd{text-align:center;color:var(--muted);font-size:0.88rem;margin-bottom:16px}
+.ca{
+  display:flex;align-items:center;gap:10px;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;padding:10px 12px;margin-top:14px;
+}
+.ca .t{flex:1;font-family:monospace;font-size:0.68rem;color:var(--blue);word-break:break-all}
 
-/* MINING */
-.ms{text-align:center;padding:20px 16px;background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:14px}
-.mr{font-family:var(--disp);font-size:2rem;font-weight:700;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.mrl{font-size:.8rem;color:var(--muted);margin-top:4px}
+.ms{
+  text-align:center;padding:20px 16px;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;margin-bottom:14px;
+}
+.mr{
+  font-family:var(--disp);font-size:2rem;font-weight:700;
+  background:var(--grad);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;
+}
+.mrl{font-size:0.8rem;color:var(--muted);margin-top:4px}
 .mi{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px}
-.mii{background:rgba(0,0,0,.25);border-radius:10px;padding:10px 6px;text-align:center}
-.mii .v{font-weight:700;font-size:.95rem;color:var(--blue)}
-.mii .l{font-size:.65rem;color:var(--muted);margin-top:2px}
+.mii{background:rgba(255,255,255,0.06);border-radius:10px;padding:10px 6px;text-align:center}
+.mii .v{font-weight:700;font-size:0.95rem;color:var(--blue)}
+.mii .l{font-size:0.65rem;color:var(--muted);margin-top:2px}
 .pw{margin:12px 0 4px}
-.pl{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);margin-bottom:6px}
-.pb{height:8px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
-.pf{height:100%;border-radius:4px;background:var(--grad);width:0%;transition:width .4s}
-.sgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:10px}
-.sdot{aspect-ratio:1;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.65rem;color:var(--muted);font-weight:600}
-.sdot.done{background:rgba(34,197,94,.15);border-color:var(--green);color:var(--green)}
-.sdot.act{background:rgba(14,165,233,.15);border-color:var(--blue);color:var(--blue)}
-.mbtn{width:100%;padding:15px;border-radius:12px;background:var(--grad);color:#05050a;font-weight:700;font-size:1rem;margin-top:14px;box-shadow:0 4px 18px rgba(14,165,233,.3)}
-.mbtn:disabled{opacity:.5;cursor:not-allowed;box-shadow:none}
-.mbtn.run{background:rgba(14,165,233,.15);color:var(--blue);border:1px solid var(--blue);box-shadow:none}
+.pl{display:flex;justify-content:space-between;font-size:0.75rem;color:var(--muted);margin-bottom:6px}
+.pb{height:8px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden}
+.pf{height:100%;border-radius:4px;background:var(--grad);width:0%;transition:width 0.4s}
+.mbtn{
+  width:100%;padding:15px;border-radius:12px;background:var(--grad);
+  color:#0f1419;font-weight:700;font-size:1rem;margin-top:14px;
+  box-shadow:0 4px 18px rgba(56,189,248,0.3);
+}
+.mbtn:disabled{opacity:0.5;cursor:not-allowed;box-shadow:none}
+.mbtn.run{background:rgba(56,189,248,0.15);color:var(--blue);border:1px solid var(--blue);box-shadow:none}
 
-/* WALLET */
-.bal{text-align:center;padding:24px 16px;background:linear-gradient(135deg,rgba(14,165,233,.1),rgba(34,197,94,.08));border:1px solid rgba(14,165,233,.2);border-radius:16px;margin-bottom:14px}
-.bal .lb{font-size:.8rem;color:var(--muted)}
+.bal{
+  text-align:center;padding:24px 16px;
+  background:linear-gradient(135deg,rgba(56,189,248,0.12),rgba(74,222,128,0.1));
+  border:1px solid rgba(56,189,248,0.25);border-radius:16px;margin-bottom:14px;
+}
+.bal .lb{font-size:0.8rem;color:var(--muted)}
 .bal .vl{font-family:var(--disp);font-size:2rem;font-weight:700;margin:6px 0}
 .wa{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
-.wai{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--card);border:1px solid var(--border);border-radius:12px;font-size:.75rem;color:var(--muted)}
-.wai .wi{width:36px;height:36px;border-radius:50%;background:rgba(14,165,233,.12);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
-.tx{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.wai{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:14px 8px;background:var(--card);border:1px solid var(--border);
+  border-radius:12px;font-size:0.75rem;color:var(--muted);
+}
+.wai .wi{
+  width:36px;height:36px;border-radius:50%;background:rgba(56,189,248,0.15);
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+}
+.tx{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
 .tx:last-child{border-bottom:none}
-.txi{width:36px;height:36px;border-radius:50%;background:rgba(34,197,94,.12);color:var(--green);display:flex;align-items:center;justify-content:center}
+.txi{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(74,222,128,0.15);color:var(--green);
+  display:flex;align-items:center;justify-content:center;
+}
 .txf{flex:1}
-.txf .tt{font-size:.88rem;font-weight:500}
-.txf .tm{font-size:.72rem;color:var(--muted)}
-.txa{font-weight:600;font-size:.9rem;color:var(--green)}
+.txf .tt{font-size:0.88rem;font-weight:500}
+.txf .tm{font-size:0.72rem;color:var(--muted)}
+.txa{font-weight:600;font-size:0.9rem;color:var(--green)}
 
-/* PROFILE */
 .ph{text-align:center;margin-bottom:18px}
-.pa{width:70px;height:70px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700;color:#05050a;margin:0 auto 10px}
+.pa{
+  width:70px;height:70px;border-radius:50%;background:var(--grad);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;font-weight:700;color:#0f1419;margin:0 auto 10px;
+}
 .pn{font-size:1.1rem;font-weight:700}
-.pi{font-size:.8rem;color:var(--muted)}
+.pi{font-size:0.8rem;color:var(--muted)}
 .pst{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
-.pst .p{text-align:center;padding:12px 6px;background:var(--card);border:1px solid var(--border);border-radius:10px}
-.pst .p .v{font-weight:700;font-size:.95rem;color:var(--blue)}
-.pst .p .l{font-size:.65rem;color:var(--muted)}
-.mi{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;font-size:.9rem;width:100%;text-align:left}
+.pst .p{
+  text-align:center;padding:12px 6px;
+  background:var(--card);border:1px solid var(--border);border-radius:10px;
+}
+.pst .p .v{font-weight:700;font-size:0.95rem;color:var(--blue)}
+.pst .p .l{font-size:0.65rem;color:var(--muted)}
+.mi{
+  display:flex;align-items:center;gap:12px;padding:14px 16px;
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  margin-bottom:8px;font-size:0.9rem;width:100%;text-align:left;
+}
 .mi .arrow{margin-left:auto;color:var(--muted)}
 
-/* REFERRAL */
-.rcb{text-align:center;padding:20px 16px;background:linear-gradient(135deg,rgba(14,165,233,.1),rgba(34,197,94,.08));border:1px solid rgba(14,165,233,.2);border-radius:16px;margin-bottom:14px}
-.rcl{font-size:.75rem;color:var(--muted);margin-bottom:6px}
+.rcb{
+  text-align:center;padding:20px 16px;
+  background:linear-gradient(135deg,rgba(56,189,248,0.12),rgba(74,222,128,0.1));
+  border:1px solid rgba(56,189,248,0.25);border-radius:16px;margin-bottom:14px;
+}
+.rcl{font-size:0.75rem;color:var(--muted);margin-bottom:6px}
 .rc{font-family:var(--disp);font-size:1.5rem;font-weight:700;letter-spacing:3px;color:var(--blue);margin-bottom:12px}
-.rlb{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.3);border-radius:10px;padding:10px 12px;margin-top:10px}
-.rlb input{flex:1;background:none;border:none;outline:none;color:var(--text);font-size:.7rem;font-family:monospace;min-width:0}
-.rr{font-size:.82rem;color:var(--muted);line-height:1.7;list-style:none}
+.rlb{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.08);border-radius:10px;padding:10px 12px;margin-top:10px;
+}
+.rlb input{
+  flex:1;background:none;border:none;outline:none;
+  color:var(--text);font-size:0.7rem;font-family:monospace;min-width:0;
+}
+.rr{font-size:0.82rem;color:var(--muted);line-height:1.7;list-style:none}
 .rr li{margin-bottom:4px}
-.ru{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.ru{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
 .ru:last-child{border-bottom:none}
-.ra{width:36px;height:36px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:#05050a}
+.ra{
+  width:36px;height:36px;border-radius:50%;background:var(--grad);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:0.8rem;color:#0f1419;
+}
 .rui{flex:1}
-.rui .n{font-size:.88rem;font-weight:500}
-.rui .d{font-size:.7rem;color:var(--muted)}
-.rb{font-size:.85rem;font-weight:600;color:var(--green)}
+.rui .n{font-size:0.88rem;font-weight:500}
+.rui .d{font-size:0.7rem;color:var(--muted)}
+.rb{font-size:0.85rem;font-weight:600;color:var(--green)}
 
-.tr{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.tr{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06)}
 .tr:last-child{border-bottom:none}
 .td{width:8px;height:8px;border-radius:50%}
-.tn{flex:1;font-size:.88rem}
-.tp{font-family:var(--disp);font-size:.85rem;color:var(--blue)}
+.tn{flex:1;font-size:0.88rem}
+.tp{font-family:var(--disp);font-size:0.85rem;color:var(--blue)}
 .icard h3{font-size:1rem;margin-bottom:6px}
-.icard p{font-size:.85rem;color:var(--muted)}
+.icard p{font-size:0.85rem;color:var(--muted)}
 
-.toast{position:fixed;bottom:72px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--bg2);border:1px solid var(--green);color:var(--green);padding:10px 18px;border-radius:10px;font-size:.84rem;font-weight:500;z-index:200;opacity:0;transition:.3s;pointer-events:none;white-space:nowrap}
+.toast{
+  position:fixed;bottom:72px;left:50%;transform:translateX(-50%) translateY(16px);
+  background:var(--bg2);border:1px solid var(--green);color:var(--green);
+  padding:10px 18px;border-radius:10px;font-size:0.84rem;font-weight:500;
+  z-index:200;opacity:0;transition:0.3s;pointer-events:none;white-space:nowrap;
+}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
 
-<!-- TOP -->
 <div class="topbar">
   <div class="logo" id="goHome"><span class="logo-i">B</span> BITWORLD</div>
-  <button class="ham" id="ham"><span></span><span></span><span></span></button>
+  <button class="ham" id="ham" type="button"><span></span><span></span><span></span></button>
 </div>
 
-<!-- SIDE -->
 <div class="ov" id="ov"></div>
 <div class="side" id="side">
   <div class="side-user">
@@ -184,80 +266,85 @@ input{font-family:inherit}
     <div class="nm">User Bitworld</div>
     <div class="ad">0x9c8a...f3ea</div>
   </div>
-  <button class="sl" data-p="home"><span class="ic">🏠</span> Home</button>
-  <button class="sl" data-p="mining"><span class="ic">⛏️</span> Mining</button>
-  <button class="sl" data-p="wallet"><span class="ic">💳</span> Wallet</button>
-  <button class="sl" data-p="profile"><span class="ic">👤</span> Profil</button>
-  <button class="sl" data-p="referral"><span class="ic">👥</span> Referral</button>
+  <button class="sl" type="button" data-p="home"><span class="ic">🏠</span> Home</button>
+  <button class="sl" type="button" data-p="mining"><span class="ic">⛏️</span> Mining</button>
+  <button class="sl" type="button" data-p="wallet"><span class="ic">💳</span> Wallet</button>
+  <button class="sl" type="button" data-p="profile"><span class="ic">👤</span> Profil</button>
+  <button class="sl" type="button" data-p="referral"><span class="ic">👥</span> Referral</button>
   <div class="sd"></div>
-  <button class="sl" data-p="tokenomics"><span class="ic">📊</span> Tokenomics</button>
-  <button class="sl" data-p="howto"><span class="ic">🛒</span> Cara Beli</button>
-  <button class="sl" data-p="roadmap"><span class="ic">🗺️</span> Roadmap</button>
+  <button class="sl" type="button" data-p="tokenomics"><span class="ic">📊</span> Tokenomics</button>
+  <button class="sl" type="button" data-p="howto"><span class="ic">🛒</span> Cara Beli</button>
+  <button class="sl" type="button" data-p="roadmap"><span class="ic">🗺️</span> Roadmap</button>
   <div class="sd"></div>
-  <a class="sl" href="https://bscscan.com/token/0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea" target="_blank"><span class="ic">🔗</span> Contract</a>
-  <a class="sl" href="https://pancakeswap.finance/swap?outputCurrency=0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea" target="_blank"><span class="ic">🥞</span> PancakeSwap</a>
+  <a class="sl" href="https://bscscan.com/token/0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea" target="_blank" rel="noopener"><span class="ic">🔗</span> Contract</a>
+  <a class="sl" href="https://pancakeswap.finance/swap?outputCurrency=0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea" target="_blank" rel="noopener"><span class="ic">🥞</span> PancakeSwap</a>
 </div>
 
-<!-- ===== HOME ===== -->
+<!-- HOME -->
 <div class="pg on" id="p-home">
   <div class="coin"><span>BTW</span><span>BITWORLD</span></div>
   <div class="ht">Welcome to <span>Bitworld</span></div>
-  <div class="hd">Token supply 21 juta. Transparan & community-driven.</div>
+  <div class="hd">Token supply 21 juta. Transparan &amp; community-driven.</div>
   <div class="sg">
     <div class="sb"><div class="v">$BTW</div><div class="l">Ticker</div></div>
     <div class="sb"><div class="v">21M</div><div class="l">Total Supply</div></div>
     <div class="sb"><div class="v">BSC</div><div class="l">Network</div></div>
     <div class="sb"><div class="v">BEP-20</div><div class="l">Standard</div></div>
   </div>
-  <button class="btn bp" data-p="mining">⛏️ Mulai Mining</button>
+  <button class="btn bp" type="button" data-p="mining">⛏️ Mulai Mining</button>
   <div class="br">
-    <a class="btn bo" href="https://pancakeswap.finance/swap?outputCurrency=0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea" target="_blank">Beli $BTW</a>
-    <button class="btn bo" data-p="wallet">Wallet</button>
+    <a class="btn bo" href="https://pancakeswap.finance/swap?outputCurrency=0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea" target="_blank" rel="noopener">Beli $BTW</a>
+    <button class="btn bo" type="button" data-p="wallet">Wallet</button>
   </div>
   <div class="ca">
     <span class="t">0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea</span>
-    <button class="btn bs bo" id="copyCA">Salin</button>
+    <button class="btn bs bo" type="button" id="copyCA">Salin</button>
   </div>
 </div>
 
-<!-- ===== MINING ===== -->
+<!-- MINING -->
 <div class="pg" id="p-mining">
   <div class="pt">⛏️ Mining</div>
-  <div class="ps">Rate: 0.002 BTW/jam · Maks 24 sesi</div>
+  <div class="ps">Rate: 0.002 BTW/jam · 1 sesi = 24 jam</div>
   <div class="ms">
     <div class="mr" id="mined">0.000</div>
-    <div class="mrl">BTW di-mining hari ini</div>
+    <div class="mrl">BTW di-mining (sesi ini)</div>
     <div class="mi">
       <div class="mii"><div class="v">0.002</div><div class="l">BTW/jam</div></div>
-      <div class="mii"><div class="v" id="sess">0/24</div><div class="l">Sesi</div></div>
-      <div class="mii"><div class="v" id="left">--:--</div><div class="l">Sisa waktu</div></div>
+      <div class="mii"><div class="v" id="sess">0</div><div class="l">Sesi selesai</div></div>
+      <div class="mii"><div class="v" id="left">--:--:--</div><div class="l">Sisa waktu</div></div>
     </div>
     <div class="pw">
-      <div class="pl"><span>Progress</span><span id="pct">0%</span></div>
+      <div class="pl"><span>Progress 24 jam</span><span id="pct">0%</span></div>
       <div class="pb"><div class="pf" id="fill"></div></div>
     </div>
   </div>
   <div class="card">
-    <div class="ct">24 Sesi</div>
-    <div class="sgrid" id="sgrid"></div>
+    <div class="ct">Info Sesi</div>
+    <div style="font-size:0.88rem;color:var(--muted);line-height:1.7">
+      <div>• Rate: <b style="color:var(--blue)">0.002 BTW / jam</b></div>
+      <div>• Durasi 1 sesi: <b style="color:var(--blue)">24 jam</b></div>
+      <div>• Reward penuh: <b style="color:var(--green)">0.048 BTW</b></div>
+      <div>• Mining tetap jalan meski di-refresh</div>
+    </div>
   </div>
-  <button class="mbtn" id="mbtn">Mulai Mining</button>
-  <p style="text-align:center;font-size:.75rem;color:var(--muted);margin-top:10px">1 sesi = 1 jam · 24 sesi/hari</p>
+  <button class="mbtn" type="button" id="mbtn">Mulai Mining</button>
+  <p style="text-align:center;font-size:0.75rem;color:var(--muted);margin-top:10px">1 sesi = 24 jam · Reward: 0.048 BTW</p>
 </div>
 
-<!-- ===== WALLET ===== -->
+<!-- WALLET -->
 <div class="pg" id="p-wallet">
   <div class="pt">💳 Wallet</div>
   <div class="ps">Wallet internal Bitworld</div>
   <div class="bal">
     <div class="lb">Total Balance</div>
     <div class="vl" id="bal">0.000 BTW</div>
-    <div style="font-size:.85rem;color:var(--muted)">≈ $0.00</div>
+    <div style="font-size:0.85rem;color:var(--muted)">≈ $0.00</div>
   </div>
   <div class="wa">
-    <button class="wai" id="dep"><div class="wi">↓</div>Deposit</button>
-    <button class="wai" id="wd"><div class="wi">↑</div>Withdraw</button>
-    <button class="wai" data-p="mining"><div class="wi">⛏️</div>Mining</button>
+    <button class="wai" type="button" id="dep"><div class="wi">↓</div>Deposit</button>
+    <button class="wai" type="button" id="wd"><div class="wi">↑</div>Withdraw</button>
+    <button class="wai" type="button" data-p="mining"><div class="wi">⛏️</div>Mining</button>
   </div>
   <div class="card">
     <div class="ct">Riwayat</div>
@@ -271,7 +358,7 @@ input{font-family:inherit}
   </div>
 </div>
 
-<!-- ===== PROFILE ===== -->
+<!-- PROFILE -->
 <div class="pg" id="p-profile">
   <div class="ph">
     <div class="pa">U</div>
@@ -283,25 +370,25 @@ input{font-family:inherit}
     <div class="p"><div class="v" id="pSess">0</div><div class="l">Sesi</div></div>
     <div class="p"><div class="v" id="pRef">0</div><div class="l">Referral</div></div>
   </div>
-  <button class="mi" data-p="mining"><span>⛏️</span> Mining History <span class="arrow">›</span></button>
-  <button class="mi" data-p="wallet"><span>💳</span> My Wallet <span class="arrow">›</span></button>
-  <button class="mi" data-p="referral"><span>👥</span> Referral <span class="arrow">›</span></button>
-  <button class="mi" data-p="tokenomics"><span>📊</span> Tokenomics <span class="arrow">›</span></button>
-  <button class="mi" data-p="howto"><span>🛒</span> Cara Beli <span class="arrow">›</span></button>
-  <button class="mi" data-p="roadmap"><span>🗺️</span> Roadmap <span class="arrow">›</span></button>
+  <button class="mi" type="button" data-p="mining"><span>⛏️</span> Mining History <span class="arrow">›</span></button>
+  <button class="mi" type="button" data-p="wallet"><span>💳</span> My Wallet <span class="arrow">›</span></button>
+  <button class="mi" type="button" data-p="referral"><span>👥</span> Referral <span class="arrow">›</span></button>
+  <button class="mi" type="button" data-p="tokenomics"><span>📊</span> Tokenomics <span class="arrow">›</span></button>
+  <button class="mi" type="button" data-p="howto"><span>🛒</span> Cara Beli <span class="arrow">›</span></button>
+  <button class="mi" type="button" data-p="roadmap"><span>🗺️</span> Roadmap <span class="arrow">›</span></button>
 </div>
 
-<!-- ===== REFERRAL ===== -->
+<!-- REFERRAL -->
 <div class="pg" id="p-referral">
   <div class="pt">👥 Referral</div>
   <div class="ps">Ajak teman, dapat bonus BTW</div>
   <div class="rcb">
     <div class="rcl">Kode Referral Kamu</div>
     <div class="rc" id="rcode">BWXXXX</div>
-    <button class="btn bp bs" id="copyCode" style="display:inline-flex;width:auto">Salin Kode</button>
+    <button class="btn bp bs" type="button" id="copyCode" style="display:inline-flex;width:auto">Salin Kode</button>
     <div class="rlb">
-      <input type="text" id="rlink" readonly/>
-      <button class="btn bs bo" id="copyLink">Salin</button>
+      <input type="text" id="rlink" readonly>
+      <button class="btn bs bo" type="button" id="copyLink">Salin</button>
     </div>
   </div>
   <div class="sg">
@@ -312,32 +399,32 @@ input{font-family:inherit}
     <div class="ct">Cara Kerja</div>
     <ul class="rr">
       <li>1. Bagikan kode/link ke teman</li>
-      <li>2. Teman daftar & mulai mining</li>
-      <li>3. Kamu dapat <b style="color:#22c55e">10%</b> dari mining mereka</li>
+      <li>2. Teman daftar &amp; mulai mining</li>
+      <li>3. Kamu dapat <b style="color:#4ade80">10%</b> dari mining mereka</li>
       <li>4. Bonus masuk Wallet</li>
     </ul>
   </div>
   <div class="card">
     <div class="ct">Daftar Referral</div>
-    <div id="rlist"><div style="text-align:center;padding:14px;color:var(--muted);font-size:.85rem">Belum ada referral</div></div>
+    <div id="rlist"><div style="text-align:center;padding:14px;color:var(--muted);font-size:0.85rem">Belum ada referral</div></div>
   </div>
-  <button class="btn bp" id="shareRef" style="margin-top:8px">📤 Bagikan Sekarang</button>
+  <button class="btn bp" type="button" id="shareRef" style="margin-top:8px">📤 Bagikan Sekarang</button>
 </div>
 
-<!-- ===== TOKENOMICS ===== -->
+<!-- TOKENOMICS -->
 <div class="pg" id="p-tokenomics">
   <div class="pt">📊 Tokenomics</div>
   <div class="ps">Total Supply: 21.000.000 BTW</div>
   <div class="card">
-    <div class="tr"><span class="td" style="background:#0ea5e9"></span><span class="tn">Liquidity Pool</span><span class="tp">40%</span></div>
-    <div class="tr"><span class="td" style="background:#22c55e"></span><span class="tn">Community & Airdrop</span><span class="tp">25%</span></div>
-    <div class="tr"><span class="td" style="background:#10b981"></span><span class="tn">Marketing</span><span class="tp">15%</span></div>
-    <div class="tr"><span class="td" style="background:#34d399"></span><span class="tn">Team (Locked)</span><span class="tp">10%</span></div>
-    <div class="tr"><span class="td" style="background:#06b6d4"></span><span class="tn">Treasury / Dev</span><span class="tp">10%</span></div>
+    <div class="tr"><span class="td" style="background:#38bdf8"></span><span class="tn">Liquidity Pool</span><span class="tp">40%</span></div>
+    <div class="tr"><span class="td" style="background:#4ade80"></span><span class="tn">Community &amp; Airdrop</span><span class="tp">25%</span></div>
+    <div class="tr"><span class="td" style="background:#34d399"></span><span class="tn">Marketing</span><span class="tp">15%</span></div>
+    <div class="tr"><span class="td" style="background:#2dd4bf"></span><span class="tn">Team (Locked)</span><span class="tp">10%</span></div>
+    <div class="tr"><span class="td" style="background:#22d3ee"></span><span class="tn">Treasury / Dev</span><span class="tp">10%</span></div>
   </div>
 </div>
 
-<!-- ===== HOWTO ===== -->
+<!-- HOWTO -->
 <div class="pg" id="p-howto">
   <div class="pt">🛒 Cara Beli $BTW</div>
   <div class="ps">Via PancakeSwap (BSC)</div>
@@ -345,153 +432,277 @@ input{font-family:inherit}
   <div class="card icard"><h3>2. Isi BNB</h3><p>Transfer BNB untuk gas fee dan pembelian</p></div>
   <div class="card icard"><h3>3. Buka PancakeSwap</h3><p>Connect wallet → pilih BNB → $BTW</p></div>
   <div class="card icard"><h3>4. Paste Contract</h3><p>0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea · Slippage 5-12%</p></div>
-  <a class="btn bp" style="margin-top:8px" href="https://pancakeswap.finance/swap?outputCurrency=0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea" target="_blank">Beli di PancakeSwap</a>
+  <a class="btn bp" style="margin-top:8px" href="https://pancakeswap.finance/swap?outputCurrency=0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea" target="_blank" rel="noopener">Beli di PancakeSwap</a>
 </div>
 
-<!-- ===== ROADMAP ===== -->
+<!-- ROADMAP -->
 <div class="pg" id="p-roadmap">
   <div class="pt">🗺️ Roadmap</div>
   <div class="ps">Perjalanan Bitworld</div>
   <div class="card icard"><h3 style="color:var(--blue)">Phase 1 — Launch ✓</h3><p>Token deploy · Liquidity · Website live</p></div>
-  <div class="card icard"><h3 style="color:var(--green)">Phase 2 — Growth (Active)</h3><p>Marketing · Community · CMC & CG listing</p></div>
+  <div class="card icard"><h3 style="color:var(--green)">Phase 2 — Growth (Active)</h3><p>Marketing · Community · CMC &amp; CG listing</p></div>
   <div class="card icard"><h3>Phase 3 — Expansion</h3><p>Partnerships · CEX listing · Utility</p></div>
   <div class="card icard"><h3>Phase 4 — Ecosystem</h3><p>Staking · NFT · Cross-chain</p></div>
 </div>
 
-<!-- BOTTOM -->
 <div class="bot">
-  <button class="bi on" data-p="home"><span class="ic">🏠</span>Home</button>
-  <button class="bi" data-p="mining"><span class="ic">⛏️</span>Mining</button>
-  <button class="bi" data-p="wallet"><span class="ic">💳</span>Wallet</button>
-  <button class="bi" data-p="profile"><span class="ic">👤</span>Profil</button>
+  <button class="bi on" type="button" data-p="home"><span class="ic">🏠</span>Home</button>
+  <button class="bi" type="button" data-p="mining"><span class="ic">⛏️</span>Mining</button>
+  <button class="bi" type="button" data-p="wallet"><span class="ic">💳</span>Wallet</button>
+  <button class="bi" type="button" data-p="profile"><span class="ic">👤</span>Profil</button>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-(function(){
-  var RATE=0.002, MAX=24;
-  var S={sessionsDone:0,minedToday:0,totalMined:0,isMining:false,sessionStart:null,balance:0,refCode:'',refCount:0,refEarned:0,referrals:[]};
-  try{var sv=JSON.parse(localStorage.getItem('btw_v2')||'{}');for(var k in sv)S[k]=sv[k]}catch(e){}
-  function save(){try{localStorage.setItem('btw_v2',JSON.stringify(S))}catch(e){}}
-  function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('on');setTimeout(function(){t.classList.remove('on')},2500)}
+(function () {
+  var RATE = 0.002;
+  var SESSION_HOURS = 24;
+  var SESSION_SEC = 86400;
 
-  function go(name){
-    var pages=document.querySelectorAll('.pg');
-    for(var i=0;i<pages.length;i++) pages[i].classList.remove('on');
-    var el=document.getElementById('p-'+name);
-    if(el) el.classList.add('on');
-    var bots=document.querySelectorAll('.bi');
-    for(var j=0;j<bots.length;j++) bots[j].classList.toggle('on', bots[j].getAttribute('data-p')===name);
-    window.scrollTo(0,0);
+  var S = {
+    sessionsDone: 0,
+    minedToday: 0,
+    totalMined: 0,
+    isMining: false,
+    sessionStart: null,
+    balance: 0,
+    refCode: "",
+    refCount: 0,
+    refEarned: 0,
+    referrals: []
+  };
+
+  try {
+    var sv = JSON.parse(localStorage.getItem("btw_v3") || "{}");
+    for (var k in sv) {
+      if (Object.prototype.hasOwnProperty.call(sv, k)) S[k] = sv[k];
+    }
+  } catch (e) {}
+
+  // Lanjutkan mining setelah refresh
+  if (S.isMining && S.sessionStart) {
+    S.sessionStart = Number(S.sessionStart);
+    var elapsed0 = (Date.now() - S.sessionStart) / 1000;
+    if (elapsed0 >= SESSION_SEC) {
+      var reward0 = RATE * SESSION_HOURS;
+      S.sessionsDone += 1;
+      S.minedToday += reward0;
+      S.totalMined += reward0;
+      S.balance += reward0;
+      S.isMining = false;
+      S.sessionStart = null;
+      try {
+        localStorage.setItem("btw_v3", JSON.stringify(S));
+      } catch (e) {}
+    }
+  }
+
+  function save() {
+    try {
+      localStorage.setItem("btw_v3", JSON.stringify(S));
+    } catch (e) {}
+  }
+
+  function toast(m) {
+    var t = document.getElementById("toast");
+    t.textContent = m;
+    t.classList.add("on");
+    setTimeout(function () {
+      t.classList.remove("on");
+    }, 2500);
+  }
+
+  function go(name) {
+    var pages = document.querySelectorAll(".pg");
+    for (var i = 0; i < pages.length; i++) pages[i].classList.remove("on");
+    var el = document.getElementById("p-" + name);
+    if (el) el.classList.add("on");
+    var bots = document.querySelectorAll(".bi");
+    for (var j = 0; j < bots.length; j++) {
+      bots[j].classList.toggle("on", bots[j].getAttribute("data-p") === name);
+    }
+    window.scrollTo(0, 0);
     closeMenu();
   }
 
-  function openMenu(){document.getElementById('ham').classList.add('on');document.getElementById('side').classList.add('on');document.getElementById('ov').classList.add('on')}
-  function closeMenu(){document.getElementById('ham').classList.remove('on');document.getElementById('side').classList.remove('on');document.getElementById('ov').classList.remove('on')}
-
-  document.getElementById('ham').onclick=function(){
-    if(document.getElementById('side').classList.contains('on')) closeMenu(); else openMenu();
-  };
-  document.getElementById('ov').onclick=closeMenu;
-  document.getElementById('goHome').onclick=function(){go('home')};
-
-  var allP=document.querySelectorAll('[data-p]');
-  for(var i=0;i<allP.length;i++){
-    allP[i].addEventListener('click',function(){go(this.getAttribute('data-p'))});
+  function openMenu() {
+    document.getElementById("ham").classList.add("on");
+    document.getElementById("side").classList.add("on");
+    document.getElementById("ov").classList.add("on");
+  }
+  function closeMenu() {
+    document.getElementById("ham").classList.remove("on");
+    document.getElementById("side").classList.remove("on");
+    document.getElementById("ov").classList.remove("on");
   }
 
-  document.getElementById('copyCA').onclick=function(){
-    navigator.clipboard.writeText('0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea').then(function(){toast('Contract tersalin!')});
+  document.getElementById("ham").onclick = function () {
+    if (document.getElementById("side").classList.contains("on")) closeMenu();
+    else openMenu();
   };
-  document.getElementById('dep').onclick=function(){toast('Fitur Deposit segera hadir')};
-  document.getElementById('wd').onclick=function(){toast('Fitur Withdraw segera hadir')};
+  document.getElementById("ov").onclick = closeMenu;
+  document.getElementById("goHome").onclick = function () {
+    go("home");
+  };
 
-  // MINING
-  function buildSess(){
-    var g=document.getElementById('sgrid');g.innerHTML='';
-    for(var i=1;i<=MAX;i++){
-      var d=document.createElement('div');d.className='sdot';d.textContent=i;
-      if(i<=S.sessionsDone)d.classList.add('done');
-      if(S.isMining&&i===S.sessionsDone+1)d.classList.add('act');
-      g.appendChild(d);
+  var allP = document.querySelectorAll("[data-p]");
+  for (var i = 0; i < allP.length; i++) {
+    allP[i].addEventListener("click", function () {
+      go(this.getAttribute("data-p"));
+    });
+  }
+
+  document.getElementById("copyCA").onclick = function () {
+    navigator.clipboard.writeText("0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea").then(function () {
+      toast("Contract tersalin!");
+    });
+  };
+  document.getElementById("dep").onclick = function () {
+    toast("Fitur Deposit segera hadir");
+  };
+  document.getElementById("wd").onclick = function () {
+    toast("Fitur Withdraw segera hadir");
+  };
+
+  function ui() {
+    var live = 0;
+    if (S.isMining && S.sessionStart) {
+      var el = (Date.now() - Number(S.sessionStart)) / 1000;
+      live = (el / 3600) * RATE;
     }
+    document.getElementById("mined").textContent = (S.minedToday + live).toFixed(4);
+    document.getElementById("sess").textContent = S.sessionsDone;
+    document.getElementById("bal").textContent = S.balance.toFixed(3) + " BTW";
+    document.getElementById("pMined").textContent = S.totalMined.toFixed(3);
+    document.getElementById("pSess").textContent = S.sessionsDone;
+    document.getElementById("pRef").textContent = S.refCount;
+
+    var b = document.getElementById("mbtn");
+    if (S.isMining) {
+      b.textContent = "Mining Berjalan...";
+      b.classList.add("run");
+    } else {
+      b.textContent = "Mulai Mining";
+      b.classList.remove("run");
+    }
+    refUI();
   }
-  function ui(){
-    document.getElementById('mined').textContent=S.minedToday.toFixed(3);
-    document.getElementById('sess').textContent=S.sessionsDone+'/'+MAX;
-    document.getElementById('bal').textContent=S.balance.toFixed(3)+' BTW';
-    document.getElementById('pMined').textContent=S.totalMined.toFixed(3);
-    document.getElementById('pSess').textContent=S.sessionsDone;
-    document.getElementById('pRef').textContent=S.refCount;
-    var b=document.getElementById('mbtn');
-    if(S.sessionsDone>=MAX){b.textContent='Sesi Habis';b.disabled=true;b.classList.remove('run')}
-    else if(S.isMining){b.textContent='Mining Berjalan...';b.classList.add('run');b.disabled=false}
-    else{b.textContent='Mulai Mining';b.classList.remove('run');b.disabled=false}
-    buildSess(); refUI();
-  }
-  document.getElementById('mbtn').onclick=function(){
-    if(S.sessionsDone>=MAX){toast('Sesi hari ini habis');return}
-    if(S.isMining){S.isMining=false;S.sessionStart=null;toast('Mining dihentikan')}
-    else{S.isMining=true;S.sessionStart=Date.now();toast('Mining dimulai!')}
-    save();ui();
+
+  document.getElementById("mbtn").onclick = function () {
+    if (S.isMining) {
+      S.isMining = false;
+      S.sessionStart = null;
+      toast("Mining dihentikan");
+    } else {
+      S.isMining = true;
+      S.sessionStart = Date.now();
+      toast("Mining 24 jam dimulai! Aman di-refresh");
+    }
+    save();
+    ui();
   };
-  setInterval(function(){
-    if(!S.isMining||!S.sessionStart){
-      document.getElementById('left').textContent='--:--';
-      document.getElementById('pct').textContent='0%';
-      document.getElementById('fill').style.width='0%';
+
+  setInterval(function () {
+    if (!S.isMining || !S.sessionStart) {
+      document.getElementById("left").textContent = "--:--:--";
+      document.getElementById("pct").textContent = "0%";
+      document.getElementById("fill").style.width = "0%";
       return;
     }
-    var el=(Date.now()-S.sessionStart)/1000, sec=3600;
-    var pct=Math.min(100,(el/sec)*100);
-    var rem=Math.max(0,sec-el);
-    var m=Math.floor(rem/60), s=Math.floor(rem%60);
-    document.getElementById('left').textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
-    document.getElementById('pct').textContent=Math.floor(pct)+'%';
-    document.getElementById('fill').style.width=pct+'%';
-    if(el>=sec){
-      S.sessionsDone++;S.minedToday+=RATE;S.totalMined+=RATE;S.balance+=RATE;
-      S.isMining=false;S.sessionStart=null;
-      toast('Sesi selesai! +'+RATE+' BTW');save();ui();
-      if(S.sessionsDone<MAX){
-        setTimeout(function(){S.isMining=true;S.sessionStart=Date.now();save();ui();toast('Sesi berikutnya dimulai')},1500);
-      }
+    var start = Number(S.sessionStart);
+    var el = (Date.now() - start) / 1000;
+    var sec = SESSION_SEC;
+    var pct = Math.min(100, (el / sec) * 100);
+    var rem = Math.max(0, sec - el);
+    var hrs = Math.floor(rem / 3600);
+    var mins = Math.floor((rem % 3600) / 60);
+    var secs = Math.floor(rem % 60);
+    function z(n) {
+      return n < 10 ? "0" + n : "" + n;
     }
-  },1000);
+    document.getElementById("left").textContent = z(hrs) + ":" + z(mins) + ":" + z(secs);
+    document.getElementById("pct").textContent = Math.floor(pct) + "%";
+    document.getElementById("fill").style.width = pct + "%";
+    document.getElementById("mined").textContent = (S.minedToday + (el / 3600) * RATE).toFixed(4);
 
-  // REFERRAL
-  function genCode(){
-    if(S.refCode)return S.refCode;
-    var c='BW',ch='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-    for(var i=0;i<4;i++)c+=ch[Math.floor(Math.random()*ch.length)];
-    S.refCode=c;save();return c;
+    if (el >= sec) {
+      var reward = RATE * SESSION_HOURS;
+      S.sessionsDone += 1;
+      S.minedToday += reward;
+      S.totalMined += reward;
+      S.balance += reward;
+      S.isMining = false;
+      S.sessionStart = null;
+      toast("Sesi 24 jam selesai! +" + reward.toFixed(3) + " BTW");
+      save();
+      ui();
+    }
+  }, 1000);
+
+  function genCode() {
+    if (S.refCode) return S.refCode;
+    var c = "BW";
+    var ch = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    for (var i = 0; i < 4; i++) c += ch[Math.floor(Math.random() * ch.length)];
+    S.refCode = c;
+    save();
+    return c;
   }
-  function refUI(){
-    var code=genCode();
-    document.getElementById('rcode').textContent=code;
-    document.getElementById('rlink').value=location.href.split('?')[0]+'?ref='+code;
-    document.getElementById('rcount').textContent=S.refCount;
-    document.getElementById('rearned').textContent=S.refEarned.toFixed(3);
-    var list=document.getElementById('rlist');
-    if(!S.referrals||!S.referrals.length){
-      list.innerHTML='<div style="text-align:center;padding:14px;color:var(--muted);font-size:.85rem">Belum ada referral</div>';
+
+  function refUI() {
+    var code = genCode();
+    document.getElementById("rcode").textContent = code;
+    document.getElementById("rlink").value = location.href.split("?")[0] + "?ref=" + code;
+    document.getElementById("rcount").textContent = S.refCount;
+    document.getElementById("rearned").textContent = S.refEarned.toFixed(3);
+    var list = document.getElementById("rlist");
+    if (!S.referrals || S.referrals.length === 0) {
+      list.innerHTML =
+        '<div style="text-align:center;padding:14px;color:var(--muted);font-size:0.85rem">Belum ada referral</div>';
     } else {
-      var h='';
-      for(var i=0;i<S.referrals.length;i++){
-        var r=S.referrals[i];
-        h+='<div class="ru"><div class="ra">'+r.name.charAt(0)+'</div><div class="rui"><div class="n">'+r.name+'</div><div class="d">'+r.date+'</div></div><div class="rb">+'+r.bonus.toFixed(3)+'</div></div>';
+      var h = "";
+      for (var i = 0; i < S.referrals.length; i++) {
+        var r = S.referrals[i];
+        h +=
+          '<div class="ru"><div class="ra">' +
+          r.name.charAt(0) +
+          '</div><div class="rui"><div class="n">' +
+          r.name +
+          '</div><div class="d">' +
+          r.date +
+          '</div></div><div class="rb">+' +
+          r.bonus.toFixed(3) +
+          "</div></div>";
       }
-      list.innerHTML=h;
+      list.innerHTML = h;
     }
   }
-  document.getElementById('copyCode').onclick=function(){navigator.clipboard.writeText(S.refCode).then(function(){toast('Kode tersalin!')})};
-  document.getElementById('copyLink').onclick=function(){navigator.clipboard.writeText(document.getElementById('rlink').value).then(function(){toast('Link tersalin!')})};
-  document.getElementById('shareRef').onclick=function(){
-    var link=document.getElementById('rlink').value;
-    var text='Gabung Bitworld ($BTW)! Kode: '+S.refCode+'\n'+link;
-    if(navigator.share){navigator.share({title:'Bitworld',text:text,url:link}).catch(function(){navigator.clipboard.writeText(text).then(function(){toast('Tersalin!')})})}
-    else{navigator.clipboard.writeText(text).then(function(){toast('Tersalin!')})}
+
+  document.getElementById("copyCode").onclick = function () {
+    navigator.clipboard.writeText(S.refCode).then(function () {
+      toast("Kode tersalin!");
+    });
+  };
+  document.getElementById("copyLink").onclick = function () {
+    navigator.clipboard.writeText(document.getElementById("rlink").value).then(function () {
+      toast("Link tersalin!");
+    });
+  };
+  document.getElementById("shareRef").onclick = function () {
+    var link = document.getElementById("rlink").value;
+    var text = "Gabung Bitworld ($BTW)! Kode: " + S.refCode + "\n" + link;
+    if (navigator.share) {
+      navigator.share({ title: "Bitworld", text: text, url: link }).catch(function () {
+        navigator.clipboard.writeText(text).then(function () {
+          toast("Tersalin!");
+        });
+      });
+    } else {
+      navigator.clipboard.writeText(text).then(function () {
+        toast("Tersalin!");
+      });
+    }
   };
 
   ui();

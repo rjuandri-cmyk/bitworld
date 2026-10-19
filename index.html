@@ -975,3 +975,34 @@ input{font-family:inherit}
 
 </body>
 </html>
+<script>
+(function () {
+  var p = null;
+  try { p = JSON.parse(localStorage.getItem('bitworld_profile')); } catch (e) {}
+  if (!p) return;
+
+  // Cari elemen nama: teks "User Bitworld" tanpa anak elemen
+  var nameEl = document.getElementById('profileName') ||
+    Array.from(document.querySelectorAll('*')).find(function (el) {
+      return el.children.length === 0 && el.textContent.trim() === 'User Bitworld';
+    });
+  if (nameEl && p.name) nameEl.textContent = p.name;
+
+  // Cari lingkaran avatar: teks "U" tanpa anak elemen
+  var av = document.getElementById('profileAvatar') ||
+    Array.from(document.querySelectorAll('*')).find(function (el) {
+      return el.children.length === 0 && el.textContent.trim() === 'U';
+    });
+  if (av) {
+    if (p.photo) {
+      av.innerHTML = '';
+      var img = document.createElement('img');
+      img.src = p.photo;
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:50%';
+      av.appendChild(img);
+    } else if (p.name) {
+      av.textContent = p.name.charAt(0).toUpperCase();
+    }
+  }
+})();
+</script>

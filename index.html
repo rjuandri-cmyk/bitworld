@@ -2494,3 +2494,883 @@
     .btn-sm { padding: 8px 14px; font-size: 0.8rem; }
     .btn-lg { padding: 13px 26px; font-size: 0.95rem
 ... 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Bitworld ($BTW)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #05050a;
+      --bg2: #0a0a12;
+      --card: rgba(255,255,255,0.04);
+      --card2: rgba(255,255,255,0.07);
+      --border: rgba(255,255,255,0.09);
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --blue: #0ea5e9;
+      --green: #22c55e;
+      --grad: linear-gradient(135deg, #0ea5e9, #22c55e);
+      --font: 'Inter', system-ui, sans-serif;
+      --disp: 'Orbitron', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; cursor: pointer; border: none; }
+
+    /* ===== TOP NAV ===== */
+    .topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 56px;
+      background: rgba(5,5,10,0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 16px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--disp); font-weight: 700; font-size: 1.05rem; letter-spacing: 0.5px;
+    }
+    .logo-dot {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--grad);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; color: #05050a; font-weight: 800;
+    }
+    .topnav-right { display: flex; align-items: center; gap: 8px; }
+    .icon-btn {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--card); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text); font-size: 1.1rem;
+    }
+    .hamburger {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--card); border: 1px solid var(--border);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    }
+    .hamburger span {
+      display: block; width: 16px; height: 2px;
+      background: var(--text); border-radius: 2px; transition: 0.25s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* ===== SIDE MENU (hamburger content) ===== */
+    .side-menu {
+      position: fixed; top: 56px; right: 0; bottom: 0; width: 280px;
+      background: var(--bg2);
+      border-left: 1px solid var(--border);
+      z-index: 150;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      overflow-y: auto;
+      padding: 20px 0;
+    }
+    .side-menu.open { transform: translateX(0); }
+    .side-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      z-index: 140; opacity: 0; pointer-events: none; transition: 0.3s;
+    }
+    .side-overlay.open { opacity: 1; pointer-events: auto; }
+
+    .side-user {
+      padding: 0 20px 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+    .side-user .avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--grad);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: #05050a; font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+    .side-user .name { font-weight: 600; font-size: 0.95rem; }
+    .side-user .addr { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+
+    .side-link {
+      display: flex; align-items: center; gap: 12px;
+      padding: 13px 20px;
+      font-size: 0.92rem; color: var(--muted);
+      transition: 0.2s;
+    }
+    .side-link:hover, .side-link.active {
+      color: var(--text); background: rgba(14,165,233,0.08);
+    }
+    .side-link .ico { width: 22px; text-align: center; font-size: 1.05rem; }
+    .side-divider {
+      height: 1px; background: var(--border); margin: 10px 20px;
+    }
+
+    /* ===== BOTTOM NAV ===== */
+    .bottomnav {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+      height: 60px;
+      background: rgba(5,5,10,0.96);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-around;
+      padding: 0 8px;
+    }
+    .bnav-item {
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      padding: 6px 12px; border-radius: 10px;
+      color: var(--muted); font-size: 0.68rem; font-weight: 500;
+      transition: 0.2s; background: none;
+    }
+    .bnav-item .ico { font-size: 1.25rem; }
+    .bnav-item.active { color: var(--blue); }
+    .bnav-item:hover { color: var(--text); }
+
+    /* ===== PAGES ===== */
+    .page {
+      display: none;
+      padding: 70px 16px 80px;
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+    }
+    .page.active { display: block; }
+
+    .page-title {
+      font-size: 1.35rem; font-weight: 700; margin-bottom: 4px;
+    }
+    .page-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 24px; }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    .card-title {
+      font-size: 0.78rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;
+    }
+
+    /* ===== HOME ===== */
+    .hero-coin {
+      width: 100px; height: 100px; border-radius: 50%;
+      background: linear-gradient(145deg, #0c4a6e, #0ea5e9 50%, #22c55e);
+      box-shadow: 0 0 30px rgba(14,165,233,0.25);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      animation: float 4s ease-in-out infinite;
+    }
+    .hero-coin span:first-child {
+      font-family: var(--disp); font-size: 1.4rem; font-weight: 700; color: #fff;
+    }
+    .hero-coin span:last-child {
+      font-size: 0.5rem; letter-spacing: 1.5px; color: rgba(255,255,255,0.8);
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    .home-title {
+      text-align: center; font-size: 1.6rem; font-weight: 800; margin-bottom: 6px;
+    }
+    .home-title span {
+      background: var(--grad); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .home-desc {
+      text-align: center; color: var(--muted); font-size: 0.88rem;
+      margin-bottom: 20px;
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px;
+    }
+    .stat-box {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px; text-align: center;
+    }
+    .stat-box .val {
+      font-family: var(--disp); font-size: 1.1rem; font-weight: 700; color: var(--blue);
+    }
+    .stat-box .lbl { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 12px 20px; border-radius: 10px;
+      font-weight: 600; font-size: 0.9rem; transition: 0.2s;
+    }
+    .btn-primary {
+      background: var(--grad); color: #05050a;
+      box-shadow: 0 2px 14px rgba(14,165,233,0.3);
+      width: 100%;
+    }
+    .btn-primary:hover { transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; border: 1px solid var(--border); color: var(--text);
+      width: 100%;
+    }
+    .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+    .btn-sm { padding: 8px 14px; font-size: 0.8rem; width: auto; }
+    .btn-row { display: flex; gap: 10px; margin-top: 12px; }
+    .btn-row .btn { flex: 1; }
+
+    .ca-box {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 12px; margin-top: 14px;
+    }
+    .ca-box .ca-text {
+      flex: 1; font-family: monospace; font-size: 0.72rem; color: var(--blue);
+      word-break: break-all;
+    }
+
+    /* ===== MINING ===== */
+    .mining-status {
+      text-align: center; padding: 24px 16px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; margin-bottom: 16px;
+    }
+    .mining-rate {
+      font-family: var(--disp); font-size: 2rem; font-weight: 700;
+      background: var(--grad); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .mining-rate-label { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+    .mining-info {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 18px;
+    }
+    .mining-info-item {
+      background: rgba(0,0,0,0.25); border-radius: 10px; padding: 10px 6px; text-align: center;
+    }
+    .mining-info-item .v { font-weight: 700; font-size: 0.95rem; color: var(--blue); }
+    .mining-info-item .l { font-size: 0.65rem; color: var(--muted); margin-top: 2px; }
+
+    .progress-wrap { margin: 16px 0 8px; }
+    .progress-label {
+      display: flex; justify-content: space-between;
+      font-size: 0.75rem; color: var(--muted); margin-bottom: 6px;
+    }
+    .progress-bar {
+      height: 8px; background: rgba(255,255,255,0.06);
+      border-radius: 4px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; border-radius: 4px; background: var(--grad);
+      transition: width 0.5s;
+    }
+
+    .session-grid {
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin-top: 12px;
+    }
+    .session-dot {
+      aspect-ratio: 1; border-radius: 8px;
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; color: var(--muted); font-weight: 600;
+    }
+    .session-dot.done {
+      background: rgba(34,197,94,0.15); border-color: var(--green); color: var(--green);
+    }
+    .session-dot.active {
+      background: rgba(14,165,233,0.15); border-color: var(--blue); color: var(--blue);
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(14,165,233,0.3); }
+      50% { box-shadow: 0 0 0 4px rgba(14,165,233,0.1); }
+    }
+
+    .mine-btn {
+      width: 100%; padding: 16px; border-radius: 12px;
+      background: var(--grad); color: #05050a;
+      font-weight: 700; font-size: 1rem; margin-top: 16px;
+      box-shadow: 0 4px 20px rgba(14,165,233,0.3);
+    }
+    .mine-btn:disabled {
+      opacity: 0.5; cursor: not-allowed; box-shadow: none;
+    }
+    .mine-btn.mining {
+      background: rgba(14,165,233,0.15); color: var(--blue);
+      border: 1px solid var(--blue); box-shadow: none;
+    }
+
+    /* ===== WALLET ===== */
+    .balance-card {
+      text-align: center; padding: 28px 16px;
+      background: linear-gradient(135deg, rgba(14,165,233,0.1), rgba(34,197,94,0.08));
+      border: 1px solid rgba(14,165,233,0.2);
+      border-radius: 16px; margin-bottom: 16px;
+    }
+    .balance-label { font-size: 0.8rem; color: var(--muted); }
+    .balance-value {
+      font-family: var(--disp); font-size: 2.2rem; font-weight: 700;
+      margin: 6px 0;
+    }
+    .balance-usd { font-size: 0.85rem; color: var(--muted); }
+
+    .wallet-actions {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px;
+    }
+    .wallet-action {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      padding: 14px 8px; background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; font-size: 0.75rem; color: var(--muted);
+      transition: 0.2s;
+    }
+    .wallet-action:hover { border-color: var(--blue); color: var(--text); }
+    .wallet-action .wa-ico {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(14,165,233,0.12);
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    }
+
+    .tx-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .tx-item:last-child { border-bottom: none; }
+    .tx-ico {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
+    }
+    .tx-ico.in { background: rgba(34,197,94,0.12); color: var(--green); }
+    .tx-ico.out { background: rgba(239,68,68,0.12); color: #ef4444; }
+    .tx-info { flex: 1; }
+    .tx-info .tx-type { font-size: 0.88rem; font-weight: 500; }
+    .tx-info .tx-time { font-size: 0.72rem; color: var(--muted); }
+    .tx-amount { font-weight: 600; font-size: 0.9rem; }
+    .tx-amount.plus { color: var(--green); }
+    .tx-amount.minus { color: #ef4444; }
+
+    /* ===== PROFILE ===== */
+    .profile-header {
+      text-align: center; margin-bottom: 24px;
+    }
+    .profile-avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--grad);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; font-weight: 700; color: #05050a;
+      margin: 0 auto 12px;
+    }
+    .profile-name { font-size: 1.15rem; font-weight: 700; }
+    .profile-id { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+    .profile-stat {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 20px;
+    }
+    .profile-stat .ps {
+      text-align: center; padding: 12px 6px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    }
+    .profile-stat .ps .v { font-weight: 700; font-size: 0.95rem; color: var(--blue); }
+    .profile-stat .ps .l { font-size: 0.65rem; color: var(--muted); }
+
+    .menu-list { margin-bottom: 16px; }
+    .menu-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 16px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; margin-bottom: 8px;
+      font-size: 0.9rem; color: var(--text);
+      transition: 0.2s;
+    }
+    .menu-item:hover { border-color: rgba(14,165,233,0.3); }
+    .menu-item .mi-ico { font-size: 1.1rem; width: 24px; text-align: center; }
+    .menu-item .mi-arrow { margin-left: auto; color: var(--muted); font-size: 0.85rem; }
+
+    /* ===== ABOUT / INFO pages inside ===== */
+    .info-card h3 { font-size: 1rem; margin-bottom: 6px; }
+    .info-card p { font-size: 0.85rem; color: var(--muted); }
+
+    .token-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .token-row:last-child { border-bottom: none; }
+    .token-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .token-row .tn { flex: 1; font-size: 0.88rem; }
+    .token-row .tp { font-family: var(--disp); font-size: 0.85rem; color: var(--blue); }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: var(--bg2); border: 1px solid var(--green);
+      color: var(--green); padding: 10px 20px; border-radius: 10px;
+      font-size: 0.85rem; font-weight: 500; z-index: 300;
+      opacity: 0; transition: 0.3s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <header class="topnav">
+    <a href="#" class="logo" onclick="showPage('home');return false;">
+      <span class="logo-dot">B</span>
+      <span>BITWORLD</span>
+    </a>
+    <div class="topnav-right">
+      <button class="icon-btn" onclick="showPage('wallet')" title="Wallet">💳</button>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- SIDE MENU (isi hamburger) -->
+  <div class="side-overlay" id="overlay" onclick="closeMenu()"></div>
+  <aside class="side-menu" id="sideMenu">
+    <div class="side-user">
+      <div class="avatar">U</div>
+      <div class="name">User Bitworld</div>
+      <div class="addr" id="sideAddr">0x9c8a...f3ea</div>
+    </div>
+    <a class="side-link" onclick="showPage('home');closeMenu()">
+      <span class="ico">🏠</span> Home
+    </a>
+    <a class="side-link" onclick="showPage('mining');closeMenu()">
+      <span class="ico">⛏️</span> Mining
+    </a>
+    <a class="side-link" onclick="showPage('wallet');closeMenu()">
+      <span class="ico">💳</span> Wallet
+    </a>
+    <a class="side-link" onclick="showPage('profile');closeMenu()">
+      <span class="ico">👤</span> Profil
+    </a>
+    <div class="side-divider"></div>
+    <a class="side-link" onclick="showPage('tokenomics');closeMenu()">
+      <span class="ico">📊</span> Tokenomics
+    </a>
+    <a class="side-link" onclick="showPage('howto');closeMenu()">
+      <span class="ico">🛒</span> Cara Beli
+    </a>
+    <a class="side-link" onclick="showPage('roadmap');closeMenu()">
+      <span class="ico">🗺️</span> Roadmap
+    </a>
+    <a class="side-link" href="#" onclick="closeMenu()">
+      <span class="ico">📄</span> Whitepaper
+    </a>
+    <div class="side-divider"></div>
+    <a class="side-link" href="https://bscscan.com/token/0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea" target="_blank">
+      <span class="ico">🔗</span> Contract (BscScan)
+    </a>
+    <a class="side-link" href="https://pancakeswap.finance/swap?outputCurrency=0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea" target="_blank">
+      <span class="ico">🥞</span> PancakeSwap
+    </a>
+  </aside>
+
+  <!-- ========== PAGE: HOME ========== -->
+  <div class="page active" id="page-home">
+    <div class="hero-coin">
+      <span>BTW</span>
+      <span>BITWORLD</span>
+    </div>
+    <h1 class="home-title">Welcome to <span>Bitworld</span></h1>
+    <p class="home-desc">Token supply terbatas 21 juta. Transparan & community-driven.</p>
+
+    <div class="stats-grid">
+      <div class="stat-box"><div class="val">$BTW</div><div class="lbl">Ticker</div></div>
+      <div class="stat-box"><div class="val">21M</div><div class="lbl">Total Supply</div></div>
+      <div class="stat-box"><div class="val">BSC</div><div class="lbl">Network</div></div>
+      <div class="stat-box"><div class="val">BEP-20</div><div class="lbl">Standard</div></div>
+    </div>
+
+    <button class="btn btn-primary" onclick="showPage('mining')">⛏️ Mulai Mining</button>
+    <div class="btn-row">
+      <a href="https://pancakeswap.finance/swap?outputCurrency=0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea" target="_blank" class="btn btn-outline">Beli $BTW</a>
+      <button class="btn btn-outline" onclick="showPage('wallet')">Wallet</button>
+    </div>
+
+    <div class="ca-box">
+      <span class="ca-text">0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea</span>
+      <button class="btn btn-sm btn-outline" onclick="copyCA()">Salin</button>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: MINING ========== -->
+  <div class="page" id="page-mining">
+    <h2 class="page-title">⛏️ Mining</h2>
+    <p class="page-sub">Rate: 0.002 BTW / jam · Maks 24 sesi</p>
+
+    <div class="mining-status">
+      <div class="mining-rate" id="minedAmount">0.000</div>
+      <div class="mining-rate-label">BTW di-mining hari ini</div>
+      <div class="mining-info">
+        <div class="mining-info-item">
+          <div class="v">0.002</div>
+          <div class="l">BTW/jam</div>
+        </div>
+        <div class="mining-info-item">
+          <div class="v" id="sessionCount">0/24</div>
+          <div class="l">Sesi</div>
+        </div>
+        <div class="mining-info-item">
+          <div class="v" id="timeLeft">--:--</div>
+          <div class="l">Sisa waktu</div>
+        </div>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span>Progress sesi</span>
+          <span id="progressPct">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">24 Sesi Mining</div>
+      <div class="session-grid" id="sessionGrid"></div>
+    </div>
+
+    <button class="mine-btn" id="mineBtn" onclick="toggleMining()">Mulai Mining</button>
+    <p style="text-align:center;font-size:0.75rem;color:var(--muted);margin-top:10px">
+      Setiap sesi = 1 jam · Total 24 sesi/hari
+    </p>
+  </div>
+
+  <!-- ========== PAGE: WALLET ========== -->
+  <div class="page" id="page-wallet">
+    <h2 class="page-title">💳 Wallet</h2>
+    <p class="page-sub">Wallet internal Bitworld</p>
+
+    <div class="balance-card">
+      <div class="balance-label">Total Balance</div>
+      <div class="balance-value" id="walletBalance">0.000 BTW</div>
+      <div class="balance-usd">≈ $0.00</div>
+    </div>
+
+    <div class="wallet-actions">
+      <button class="wallet-action" onclick="toast('Fitur Deposit segera hadir')">
+        <div class="wa-ico">↓</div> Deposit
+      </button>
+      <button class="wallet-action" onclick="toast('Fitur Withdraw segera hadir')">
+        <div class="wa-ico">↑</div> Withdraw
+      </button>
+      <button class="wallet-action" onclick="showPage('mining')">
+        <div class="wa-ico">⛏️</div> Mining
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Riwayat Transaksi</div>
+      <div id="txList">
+        <div class="tx-item">
+          <div class="tx-ico in">↓</div>
+          <div class="tx-info">
+            <div class="tx-type">Mining Reward</div>
+            <div class="tx-time">Belum ada transaksi</div>
+          </div>
+          <div class="tx-amount plus">+0.000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: PROFILE ========== -->
+  <div class="page" id="page-profile">
+    <div class="profile-header">
+      <div class="profile-avatar">U</div>
+      <div class="profile-name">User Bitworld</div>
+      <div class="profile-id">ID: BW-0001</div>
+    </div>
+
+    <div class="profile-stat">
+      <div class="ps"><div class="v" id="profMined">0.000</div><div class="l">Total Mined</div></div>
+      <div class="ps"><div class="v" id="profSessions">0</div><div class="l">Sesi</div></div>
+      <div class="ps"><div class="v">0</div><div class="l">Referral</div></div>
+    </div>
+
+    <div class="menu-list">
+      <a class="menu-item" onclick="showPage('mining')">
+        <span class="mi-ico">⛏️</span> Mining History <span class="mi-arrow">›</span>
+      </a>
+      <a class="menu-item" onclick="showPage('wallet')">
+        <span class="mi-ico">💳</span> My Wallet <span class="mi-arrow">›</span>
+      </a>
+      <a class="menu-item" href="#">
+        <span class="mi-ico">👥</span> Referral <span class="mi-arrow">›</span>
+      </a>
+      <a class="menu-item" href="#">
+        <span class="mi-ico">📄</span> Whitepaper <span class="mi-arrow">›</span>
+      </a>
+      <a class="menu-item" href="https://bscscan.com/token/0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea" target="_blank">
+        <span class="mi-ico">🔗</span> Smart Contract <span class="mi-arrow">›</span>
+      </a>
+      <a class="menu-item" href="#">
+        <span class="mi-ico">⚙️</span> Settings <span class="mi-arrow">›</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: TOKENOMICS ========== -->
+  <div class="page" id="page-tokenomics">
+    <h2 class="page-title">📊 Tokenomics</h2>
+    <p class="page-sub">Total Supply: 21.000.000 BTW</p>
+    <div class="card">
+      <div class="token-row"><span class="token-dot" style="background:#0ea5e9"></span><span class="tn">Liquidity Pool</span><span class="tp">40%</span></div>
+      <div class="token-row"><span class="token-dot" style="background:#22c55e"></span><span class="tn">Community & Airdrop</span><span class="tp">25%</span></div>
+      <div class="token-row"><span class="token-dot" style="background:#10b981"></span><span class="tn">Marketing</span><span class="tp">15%</span></div>
+      <div class="token-row"><span class="token-dot" style="background:#34d399"></span><span class="tn">Team (Locked)</span><span class="tp">10%</span></div>
+      <div class="token-row"><span class="token-dot" style="background:#06b6d4"></span><span class="tn">Treasury / Dev</span><span class="tp">10%</span></div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE: HOW TO BUY ========== -->
+  <div class="page" id="page-howto">
+    <h2 class="page-title">🛒 Cara Beli $BTW</h2>
+    <p class="page-sub">Via PancakeSwap (BSC)</p>
+    <div class="card info-card">
+      <h3>1. Siapkan Wallet</h3>
+      <p>MetaMask / Trust Wallet → switch ke BNB Smart Chain</p>
+    </div>
+    <div class="card info-card">
+      <h3>2. Isi BNB</h3>
+      <p>Transfer BNB untuk gas fee dan pembelian</p>
+    </div>
+    <div class="card info-card">
+      <h3>3. Buka PancakeSwap</h3>
+      <p>Connect wallet → pilih BNB → $BTW</p>
+    </div>
+    <div class="card info-card">
+      <h3>4. Paste Contract</h3>
+      <p>0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea · Slippage 5-12%</p>
+    </div>
+    <a href="https://pancakeswap.finance/swap?outputCurrency=0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea" target="_blank" class="btn btn-primary" style="margin-top:8px">Beli di PancakeSwap</a>
+  </div>
+
+  <!-- ========== PAGE: ROADMAP ========== -->
+  <div class="page" id="page-roadmap">
+    <h2 class="page-title">🗺️ Roadmap</h2>
+    <p class="page-sub">Perjalanan Bitworld</p>
+    <div class="card info-card">
+      <h3 style="color:var(--blue)">Phase 1 — Launch ✓</h3>
+      <p>Token deploy · Liquidity · Website live</p>
+    </div>
+    <div class="card info-card">
+      <h3 style="color:var(--green)">Phase 2 — Growth (Active)</h3>
+      <p>Marketing · Community · CMC & CG listing</p>
+    </div>
+    <div class="card info-card">
+      <h3>Phase 3 — Expansion</h3>
+      <p>Partnerships · CEX listing · Utility</p>
+    </div>
+    <div class="card info-card">
+      <h3>Phase 4 — Ecosystem</h3>
+      <p>Staking · NFT · Cross-chain</p>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottomnav">
+    <button class="bnav-item active" id="bnav-home" onclick="showPage('home')">
+      <span class="ico">🏠</span> Home
+    </button>
+    <button class="bnav-item" id="bnav-mining" onclick="showPage('mining')">
+      <span class="ico">⛏️</span> Mining
+    </button>
+    <button class="bnav-item" id="bnav-wallet" onclick="showPage('wallet')">
+      <span class="ico">💳</span> Wallet
+    </button>
+    <button class="bnav-item" id="bnav-profile" onclick="showPage('profile')">
+      <span class="ico">👤</span> Profil
+    </button>
+  </nav>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ===== STATE =====
+    const RATE = 0.002; // BTW per hour
+    const MAX_SESSIONS = 24;
+    let state = {
+      sessionsDone: 0,
+      minedToday: 0,
+      totalMined: 0,
+      isMining: false,
+      sessionStart: null,
+      balance: 0
+    };
+
+    // Load from localStorage
+    try {
+      const saved = JSON.parse(localStorage.getItem('btw_mine') || '{}');
+      Object.assign(state, saved);
+    } catch(e) {}
+
+    function save() {
+      localStorage.setItem('btw_mine', JSON.stringify({
+        sessionsDone: state.sessionsDone,
+        minedToday: state.minedToday,
+        totalMined: state.totalMined,
+        isMining: state.isMining,
+        sessionStart: state.sessionStart,
+        balance: state.balance
+      }));
+    }
+
+    // ===== NAVIGATION =====
+    function showPage(name) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const page = document.getElementById('page-' + name);
+      if (page) page.classList.add('active');
+
+      document.querySelectorAll('.bnav-item').forEach(b => b.classList.remove('active'));
+      const bnav = document.getElementById('bnav-' + name);
+      if (bnav) bnav.classList.add('active');
+
+      window.scrollTo(0, 0);
+      closeMenu();
+    }
+
+    function toggleMenu() {
+      document.getElementById('hamburger').classList.toggle('open');
+      document.getElementById('sideMenu').classList.toggle('open');
+      document.getElementById('overlay').classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('hamburger').classList.remove('open');
+      document.getElementById('sideMenu').classList.remove('open');
+      document.getElementById('overlay').classList.remove('open');
+    }
+
+    // ===== MINING =====
+    function buildSessions() {
+      const grid = document.getElementById('sessionGrid');
+      grid.innerHTML = '';
+      for (let i = 1; i <= MAX_SESSIONS; i++) {
+        const d = document.createElement('div');
+        d.className = 'session-dot';
+        d.textContent = i;
+        if (i <= state.sessionsDone) d.classList.add('done');
+        if (state.isMining && i === state.sessionsDone + 1) d.classList.add('active');
+        grid.appendChild(d);
+      }
+    }
+
+    function updateUI() {
+      document.getElementById('minedAmount').textContent = state.minedToday.toFixed(3);
+      document.getElementById('sessionCount').textContent = state.sessionsDone + '/' + MAX_SESSIONS;
+      document.getElementById('walletBalance').textContent = state.balance.toFixed(3) + ' BTW';
+      document.getElementById('profMined').textContent = state.totalMined.toFixed(3);
+      document.getElementById('profSessions').textContent = state.sessionsDone;
+
+      const btn = document.getElementById('mineBtn');
+      if (state.sessionsDone >= MAX_SESSIONS) {
+        btn.textContent = 'Sesi Hari Ini Habis';
+        btn.disabled = true;
+        btn.classList.remove('mining');
+      } else if (state.isMining) {
+        btn.textContent = '⏸ Mining Berjalan...';
+        btn.classList.add('mining');
+        btn.disabled = false;
+      } else {
+        btn.textContent = 'Mulai Mining';
+        btn.classList.remove('mining');
+        btn.disabled = false;
+      }
+      buildSessions();
+    }
+
+    function toggleMining() {
+      if (state.sessionsDone >= MAX_SESSIONS) {
+        toast('Sesi hari ini sudah habis (24/24)');
+        return;
+      }
+      if (state.isMining) {
+        // Stop
+        state.isMining = false;
+        state.sessionStart = null;
+        toast('Mining dihentikan');
+      } else {
+        // Start
+        state.isMining = true;
+        state.sessionStart = Date.now();
+        toast('Mining dimulai! Rate 0.002 BTW/jam');
+      }
+      save();
+      updateUI();
+    }
+
+    // Tick every second
+    setInterval(() => {
+      if (!state.isMining || !state.sessionStart) {
+        document.getElementById('timeLeft').textContent = '--:--';
+        document.getElementById('progressPct').textContent = '0%';
+        document.getElementById('progressFill').style.width = '0%';
+        return;
+      }
+      const elapsed = (Date.now() - state.sessionStart) / 1000; // seconds
+      const sessionSec = 3600; // 1 hour
+      const pct = Math.min(100, (elapsed / sessionSec) * 100);
+      const remaining = Math.max(0, sessionSec - elapsed);
+      const mins = Math.floor(remaining / 60);
+      const secs = Math.floor(remaining % 60);
+
+      document.getElementById('timeLeft').textContent =
+        String(mins).padStart(2,'0') + ':' + String(secs).padStart(2,'0');
+      document.getElementById('progressPct').textContent = Math.floor(pct) + '%';
+      document.getElementById('progressFill').style.width = pct + '%';
+
+      // Reward continuously
+      const earned = (elapsed / 3600) * RATE;
+      // Show current session progress in mined (session based)
+      // When session complete:
+      if (elapsed >= sessionSec) {
+        state.sessionsDone++;
+        state.minedToday += RATE;
+        state.totalMined += RATE;
+        state.balance += RATE;
+        state.isMining = false;
+        state.sessionStart = null;
+        toast('Sesi selesai! +' + RATE + ' BTW');
+        save();
+        updateUI();
+
+        // Auto-start next if available
+        if (state.sessionsDone < MAX_SESSIONS) {
+          setTimeout(() => {
+            state.isMining = true;
+            state.sessionStart = Date.now();
+            save();
+            updateUI();
+            toast('Sesi berikutnya dimulai');
+          }, 1500);
+        }
+      }
+    }, 1000);
+
+    // ===== HELPERS =====
+    function copyCA() {
+      navigator.clipboard.writeText('0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea').then(() => {
+        toast('Contract tersalin!');
+      });
+    }
+    function toast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    // Init
+    updateUI();
+  </script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bitworld ($BTW) — Build the Crypto World</title>
+  <meta name="description" content="Bitworld (BTW) — Token generasi baru di Binance Smart Chain. Supply 21 juta. Contract verified." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Background Effects -->
+  <div class="bg-glow"></div>
+  <div class="bg-grid"></div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="logo">
+        <span class="logo-icon">◆</span>
+        <span class="logo-text">BITWORLD</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#about">Tentang</a>
+        <a href="#tokenomics">Tokenomics</a>
+        <a href="#howtobuy">Cara Beli</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#community">Komunitas</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="https://bscscan.com/token/0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea" target="_blank" class="btn btn-outline">Contract</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="badge">⚡ Live on Binance Smart Chain</div>
+      <h1>
+        Welcome to<br />
+        <span class="gradient-text">Bitworld</span>
+      </h1>
+      <p class="hero-desc">
+        $BTW — Token dengan supply terbatas 21 juta.<br />
+        Membangun ekosistem crypto yang transparan, fair, dan community-driven.
+      </p>
+      <div class="hero-cta">
+        <a href="#howtobuy" class="btn btn-primary">Beli $BTW</a>
+        <a href="https://bscscan.com/token/0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea" target="_blank" class="btn btn-ghost">Lihat di BscScan ↗</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value">$BTW</span>
+          <span class="stat-label">Ticker</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">21M</span>
+          <span class="stat-label">Total Supply</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">BSC</span>
+          <span class="stat-label">Network</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">BEP-20</span>
+          <span class="stat-label">Standard</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contract Address -->
+  <section class="section contract-section">
+    <div class="container">
+      <div class="contract-box">
+        <div class="contract-label">Smart Contract Address (BSC)</div>
+        <div class="contract-address" id="contractAddress">
+          0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea
+        </div>
+        <button class="btn btn-outline copy-btn" id="copyBtn">Salin Contract</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Tentang Bitworld</span>
+        <h2>Membangun dunia crypto<br />yang lebih fair</h2>
+        <p>
+          Bitworld ($BTW) diluncurkan dengan visi menciptakan ekosistem yang transparan, 
+          community-first, dan memiliki supply yang terbatas seperti Bitcoin (21 juta).
+        </p>
+      </div>
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="card-icon">🔒</div>
+          <h3>Supply Terbatas</h3>
+          <p>Hanya 21.000.000 $BTW di seluruh dunia. Tidak ada mint tambahan. Fixed supply.</p>
+        </div>
+        <div class="about-card">
+          <div class="card-icon">👁️</div>
+          <h3>Transparan</h3>
+          <p>Contract verified di BscScan. Semua transaksi bisa dilacak secara on-chain.</p>
+        </div>
+        <div class="about-card">
+          <div class="card-icon">🌍</div>
+          <h3>Community Driven</h3>
+          <p>Dibangun bersama komunitas. Keputusan penting akan melibatkan holder $BTW.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tokenomics -->
+  <section id="tokenomics" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Tokenomics</span>
+        <h2>$BTW Token Distribution</h2>
+        <p>Total Supply: <strong>21.000.000 BTW</strong></p>
+      </div>
+      <div class="tokenomics-wrapper">
+        <div class="token-chart">
+          <div class="chart-ring">
+            <div class="chart-center">
+              <span class="chart-label">Total</span>
+              <span class="chart-value">21M</span>
+            </div>
+          </div>
+        </div>
+        <div class="token-list">
+          <div class="token-item">
+            <span class="dot" style="background:#00f0ff"></span>
+            <div class="token-info">
+              <span class="token-name">Liquidity Pool</span>
+              <span class="token-pct">40%</span>
+            </div>
+            <div class="token-bar"><div style="width:40%;background:#00f0ff"></div></div>
+          </div>
+          <div class="token-item">
+            <span class="dot" style="background:#a855f7"></span>
+            <div class="token-info">
+              <span class="token-name">Community & Airdrop</span>
+              <span class="token-pct">25%</span>
+            </div>
+            <div class="token-bar"><div style="width:25%;background:#a855f7"></div></div>
+          </div>
+          <div class="token-item">
+            <span class="dot" style="background:#22c55e"></span>
+            <div class="token-info">
+              <span class="token-name">Marketing & Growth</span>
+              <span class="token-pct">15%</span>
+            </div>
+            <div class="token-bar"><div style="width:15%;background:#22c55e"></div></div>
+          </div>
+          <div class="token-item">
+            <span class="dot" style="background:#f59e0b"></span>
+            <div class="token-info">
+              <span class="token-name">Team (Locked)</span>
+              <span class="token-pct">10%</span>
+            </div>
+            <div class="token-bar"><div style="width:10%;background:#f59e0b"></div></div>
+          </div>
+          <div class="token-item">
+            <span class="dot" style="background:#ef4444"></span>
+            <div class="token-info">
+              <span class="token-name">Treasury / Development</span>
+              <span class="token-pct">10%</span>
+            </div>
+            <div class="token-bar"><div style="width:10%;background:#ef4444"></div></div>
+          </div>
+        </div>
+      </div>
+      <p class="tokenomics-note">* Distribusi di atas bersifat ilustrasi. Sesuaikan dengan data real proyek kamu.</p>
+    </div>
+  </section>
+
+  <!-- How to Buy -->
+  <section id="howtobuy" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Cara Beli</span>
+        <h2>Cara membeli $BTW</h2>
+        <p>Mudah dan cepat melalui PancakeSwap di jaringan BSC.</p>
+      </div>
+      <div class="howto-grid">
+        <div class="howto-card">
+          <div class="howto-num">1</div>
+          <h3>Siapkan Wallet</h3>
+          <p>Install MetaMask / Trust Wallet. Pastikan sudah switch ke jaringan <strong>BNB Smart Chain</strong>.</p>
+        </div>
+        <div class="howto-card">
+          <div class="howto-num">2</div>
+          <h3>Isi BNB</h3>
+          <p>Transfer BNB ke wallet kamu untuk gas fee dan membeli $BTW.</p>
+        </div>
+        <div class="howto-card">
+          <div class="howto-num">3</div>
+          <h3>Buka PancakeSwap</h3>
+          <p>Kunjungi pancakeswap.finance → Connect Wallet → Pilih BNB → $BTW.</p>
+        </div>
+        <div class="howto-card">
+          <div class="howto-num">4</div>
+          <h3>Paste Contract</h3>
+          <p>Paste alamat contract di bawah, set slippage 5-12%, lalu Swap.</p>
+        </div>
+      </div>
+      <div class="contract-box" style="margin-top:40px">
+        <div class="contract-label">Contract Address untuk di-paste</div>
+        <div class="contract-address">0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea</div>
+        <button class="btn btn-outline copy-btn" onclick="copyContract()">Salin Contract</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roadmap -->
+  <section id="roadmap" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Roadmap</span>
+        <h2>Perjalanan Bitworld</h2>
+      </div>
+      <div class="roadmap">
+        <div class="roadmap-item completed">
+          <div class="roadmap-dot"></div>
+          <div class="roadmap-content">
+            <span class="roadmap-phase">Phase 1</span>
+            <h3>Launch</h3>
+            <ul>
+              <li>Token deployment di BSC</li>
+              <li>Liquidity pool dibuat</li>
+              <li>Website & social media live</li>
+            </ul>
+          </div>
+        </div>
+        <div class="roadmap-item active">
+          <div class="roadmap-dot"></div>
+          <div class="roadmap-content">
+            <span class="roadmap-phase">Phase 2</span>
+            <h3>Growth</h3>
+            <ul>
+              <li>Marketing campaign</li>
+              <li>Community building</li>
+              <li>CMC & CoinGecko listing</li>
+            </ul>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div class="roadmap-content">
+            <span class="roadmap-phase">Phase 3</span>
+            <h3>Expansion</h3>
+            <ul>
+              <li>Partnerships</li>
+              <li>CEX listing</li>
+              <li>Utility development</li>
+            </ul>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="roadmap-dot"></div>
+          <div class="roadmap-content">
+            <span class="roadmap-phase">Phase 4</span>
+            <h3>Ecosystem</h3>
+            <ul>
+              <li>Staking / Rewards</li>
+              <li>NFT / Game integration</li>
+              <li>Cross-chain expansion</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Community -->
+  <section id="community" class="section">
+    <div class="container">
+      <div class="cta-box">
+        <h2>Gabung komunitas<br />Bitworld</h2>
+        <p>Ikuti update terbaru dan diskusi bersama holder $BTW lainnya.</p>
+        <div class="social-links">
+          <a href="#" class="social-btn">𝕏 Twitter / X</a>
+          <a href="#" class="social-btn">Telegram</a>
+          <a href="#" class="social-btn">Discord</a>
+        </div>
+        <div class="cta-actions">
+          <a href="#howtobuy" class="btn btn-primary">Beli $BTW Sekarang</a>
+          <a href="https://bscscan.com/token/0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea" target="_blank" class="btn btn-outline">BscScan</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <span class="logo-icon">◆</span>
+          <span class="logo-text">BITWORLD</span>
+        </a>
+        <p>Building the crypto world, one block at a time.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Token</h4>
+          <a href="https://bscscan.com/token/0x9c8a29b9b9866464bb34aae32fd94a1594b1f3ea" target="_blank">Contract</a>
+          <a href="#tokenomics">Tokenomics</a>
+          <a href="#howtobuy">How to Buy</a>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <a href="#">Twitter</a>
+          <a href="#">Telegram</a>
+          <a href="#">Discord</a>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="#">Whitepaper</a>
+          <a href="#">Audit</a>
+          <a href="#">FAQ</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2025 Bitworld. All rights reserved. Cryptocurrency involves risk. DYOR.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+      </html>

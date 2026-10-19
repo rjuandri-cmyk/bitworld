@@ -1,482 +1,123 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#07110d">
-  <meta name="description" content="Bitworld ($BTW) - Community Token Dashboard">
-  <title>Bitworld ($BTW)</title>
-
-  <style>
-    :root {
-      --bg: #07110d;
-      --card: #101d17;
-      --green: #25e68a;
-      --text: #f3fff8;
-      --muted: #9bb5a6;
-      --border: #254434;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-
-    header {
-      padding: 20px;
-      text-align: center;
-      background: #0b1811;
-      border-bottom: 1px solid var(--border);
-    }
-
-    header h1 {
-      margin: 0;
-      color: var(--green);
-      font-size: 28px;
-    }
-
-    header p {
-      color: var(--muted);
-      margin-bottom: 0;
-    }
-
-    nav {
-      display: flex;
-      gap: 8px;
-      padding: 12px;
-      overflow-x: auto;
-      background: #0b1811;
-    }
-
-    nav button {
-      flex: 0 0 auto;
-      padding: 10px 14px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      background: var(--card);
-      cursor: pointer;
-    }
-
-    nav button.active {
-      background: var(--green);
-      color: #062013;
-      font-weight: bold;
-    }
-
-    main {
-      width: min(100% - 24px, 760px);
-      margin: 20px auto;
-    }
-
-    .page {
-      display: none;
-    }
-
-    .page.active {
-      display: block;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 18px;
-      margin-bottom: 16px;
-    }
-
-    h2 {
-      margin-top: 0;
-      color: var(--green);
-    }
-
-    .balance {
-      font-size: 30px;
-      font-weight: bold;
-      margin: 12px 0;
-      overflow-wrap: anywhere;
-    }
-
-    .muted {
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 12px 16px;
-      border: 0;
-      border-radius: 9px;
-      background: var(--green);
-      color: #062013;
-      font-weight: bold;
-      cursor: pointer;
-      text-decoration: none;
-      margin: 4px 2px;
-    }
-
-    .button.secondary {
-      background: #1b3024;
-      border: 1px solid var(--border);
-      color: var(--text);
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0 12px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: #08130d;
-      color: var(--text);
-    }
-
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .stat {
-      padding: 14px;
-      border-radius: 10px;
-      background: #0a1710;
-      border: 1px solid var(--border);
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 20px;
-      margin-top: 8px;
-      overflow-wrap: anywhere;
-    }
-
-    ul {
-      padding-left: 20px;
-      line-height: 1.8;
-    }
-
-    footer {
-      padding: 24px 16px;
-      text-align: center;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-      font-size: 13px;
-    }
-
-    @media (max-width: 420px) {
-      header h1 {
-        font-size: 24px;
-      }
-
-      .balance {
-        font-size: 25px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <header>
-    <h1>BITWORLD</h1>
-    <p>Community Token Ecosystem · $BTW</p>
-  </header>
-
-  <nav aria-label="Navigasi utama">
-    <button class="active" data-page="home">Beranda</button>
-    <button data-page="mining">Mining</button>
-    <button data-page="wallet">Dompet</button>
-    <button data-page="profile">Profil</button>
-    <button data-page="referral">Referral</button>
-    <button data-page="tokenomics">Tokenomics</button>
-    <button data-page="roadmap">Roadmap</button>
-  </nav>
-
-  <main>
-    <section class="page active" id="home">
-      <div class="card">
-        <h2>Selamat Datang di Bitworld</h2>
-        <p class="muted">
-          Platform komunitas Bitworld untuk memantau saldo simulasi,
-          sesi mining, profil, dan informasi token $BTW.
-        </p>
-        <div class="stat-grid">
-          <div class="stat">
-            Saldo BTW
-            <strong id="homeBalance">0 BTW</strong>
-          </div>
-          <div class="stat">
-            Status Mining
-            <strong id="homeMining">Tidak aktif</strong>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>Informasi</h2>
-        <p class="muted">
-          Selamat datang di komunitas Bitworld. Periksa informasi
-          proyek sebelum melakukan transaksi aset digital.
-        </p>
-        <button class="button" data-goto="mining">Buka Mining</button>
-        <button class="button secondary" data-goto="wallet">Buka Dompet</button>
-      </div>
-    </section>
-
-    <section class="page" id="mining">
-      <div class="card">
-        <h2>Mining $BTW</h2>
-        <p class="muted">
-          Demo sesi mining lokal. Angka reward di bawah ini hanyalah
-          simulasi dan bukan penambangan blockchain sungguhan.
-        </p>
-        <div class="balance"><span id="miningBalance">0</span> BTW</div>
-        <p>Status: <strong id="miningStatus">Tidak aktif</strong></p>
-        <p>Waktu sesi: <strong id="miningTimer">00:00:00</strong></p>
-        <button class="button" id="startMining">Mulai Mining</button>
-        <button class="button secondary" id="stopMining">Hentikan Mining</button>
-      </div>
-    </section>
-
-    <section class="page" id="wallet">
-      <div class="card">
-        <h2>Dompet Bitworld</h2>
-        <p class="muted">Saldo demo tersimpan di browser perangkat ini.</p>
-        <div class="balance"><span id="walletBalance">0</span> BTW</div>
-        <label for="walletAddress">Alamat dompet publik</label>
-        <input id="walletAddress" placeholder="Masukkan alamat publik dompet">
-        <button class="button" id="saveWallet">Simpan Alamat</button>
-        <p id="walletMessage" class="muted"></p>
-        <hr style="border-color: var(--border)">
-        <p><strong>Deposit:</strong> Belum aktif.</p>
-        <p><strong>Penarikan:</strong> Belum aktif.</p>
-        <p class="muted">
-          Jangan pernah memasukkan seed phrase atau private key ke situs ini.
-        </p>
-      </div>
-    </section>
-
-    <section class="page" id="profile">
-      <div class="card">
-        <h2>Profil Pengguna</h2>
-        <label for="profileName">Nama pengguna</label>
-        <input id="profileName" placeholder="Masukkan nama">
-        <label for="profileEmail">Email</label>
-        <input id="profileEmail" type="email" placeholder="Masukkan email">
-        <button class="button" id="saveProfile">Simpan Profil</button>
-        <p id="profileMessage" class="muted"></p>
-        <a class="button secondary" href="edit-profile.html">Buka Halaman Edit Profil</a>
-      </div>
-    </section>
-
-    <section class="page" id="referral">
-      <div class="card">
-        <h2>Program Referral</h2>
-        <p class="muted">
-          Bagikan kode demo kepada teman. Sistem referral belum terhubung
-          ke server dan belum memberikan reward nyata.
-        </p>
-        <label for="referralCode">Kode referral</label>
-        <input id="referralCode" readonly>
-        <button class="button" id="copyReferral">Salin Kode</button>
-        <p id="referralMessage" class="muted"></p>
-      </div>
-    </section>
-
-    <section class="page" id="tokenomics">
-      <div class="card">
-        <h2>Tokenomics $BTW</h2>
-        <p class="muted">
-          Detail berikut adalah tempat untuk memasukkan tokenomics resmi
-          Bitworld. Jangan anggap angka yang belum dikonfirmasi sebagai
-          data resmi proyek.
-        </p>
-        <ul>
-          <li>Nama token: Bitworld</li>
-          <li>Simbol: BTW</li>
-          <li>Total supply: Belum dikonfirmasi</li>
-          <li>Jaringan blockchain: Belum dikonfirmasi</li>
-          <li>Alamat kontrak: Belum dikonfirmasi</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="page" id="roadmap">
-      <div class="card">
-        <h2>Roadmap</h2>
-        <ul>
-          <li><strong>Tahap 1:</strong> Pembuatan tampilan website.</li>
-          <li><strong>Tahap 2:</strong> Pengujian fitur dan penyimpanan data.</li>
-          <li><strong>Tahap 3:</strong> Integrasi server dan sistem akun.</li>
-          <li><strong>Tahap 4:</strong> Integrasi blockchain setelah diverifikasi.</li>
-        </ul>
-        <p class="muted">
-          Roadmap ini merupakan rancangan awal, bukan janji pelaksanaan.
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    Bitworld ($BTW) · Prototipe komunitas ·
-    Saldo dan mining belum terhubung ke blockchain.
-  </footer>
-
-  <script>
-    const STORAGE_KEY = "bitworld_demo_v1";
-
-    const defaultState = {
-      balance: 0,
-      wallet: "",
-      name: "",
-      email: "",
-      referral: "BTW" + Math.random().toString(36).slice(2, 8).toUpperCase(),
-      mining: false,
-      miningStartedAt: null,
-      miningElapsed: 0
-    };
-
-    function loadState() {
-      try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        return saved ? { ...defaultState, ...JSON.parse(saved) } : { ...defaultState };
-      } catch (error) {
-        return { ...defaultState };
-      }
-    }
-
-    let state = loadState();
-    let timerHandle = null;
-
-    function saveState() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      render();
-    }
-
-    function formatTime(seconds) {
-      seconds = Math.max(0, Math.floor(seconds));
-      const h = String(Math.floor(seconds / 3600)).padStart(2, "0");
-      const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
-      const s = String(seconds % 60).padStart(2, "0");
-      return `${h}:${m}:${s}`;
-    }
-
-    function elapsedSeconds() {
-      if (!state.mining || !state.miningStartedAt) {
-        return state.miningElapsed || 0;
-      }
-      return (state.miningElapsed || 0) +
-        Math.floor((Date.now() - state.miningStartedAt) / 1000);
-    }
-
-    function render() {
-      const balance = Number(state.balance || 0).toFixed(4);
-
-      document.getElementById("homeBalance").textContent = balance + " BTW";
-      document.getElementById("miningBalance").textContent = balance;
-      document.getElementById("walletBalance").textContent = balance;
-      document.getElementById("homeMining").textContent =
-        state.mining ? "Aktif (demo)" : "Tidak aktif";
-      document.getElementById("miningStatus").textContent =
-        state.mining ? "Aktif (demo)" : "Tidak aktif";
-      document.getElementById("miningTimer").textContent =
-        formatTime(elapsedSeconds());
-
-      document.getElementById("walletAddress").value = state.wallet || "";
-      document.getElementById("profileName").value = state.name || "";
-      document.getElementById("profileEmail").value = state.email || "";
-      document.getElementById("referralCode").value = state.referral;
-    }
-
-    function showPage(pageId) {
-      document.querySelectorAll(".page").forEach(page => {
-        page.classList.toggle("active", page.id === pageId);
-      });
-
-      document.querySelectorAll("nav button[data-page]").forEach(button => {
-        button.classList.toggle("active", button.dataset.page === pageId);
-      });
-    }
-
-    document.querySelectorAll("nav button[data-page]").forEach(button => {
-      button.addEventListener("click", () => showPage(button.dataset.page));
-    });
-
-    document.querySelectorAll("[data-goto]").forEach(button => {
-      button.addEventListener("click", () => showPage(button.dataset.goto));
-    });
-
-    document.getElementById("startMining").addEventListener("click", () => {
-      if (state.mining) {
-        alert("Sesi demo mining sudah aktif.");
-        return;
-      }
-
-      state.mining = true;
-      state.miningStartedAt = Date.now();
-      saveState();
-
-      if (timerHandle) clearInterval(timerHandle);
-      timerHandle = setInterval(render, 1000);
-    });
-
-    document.getElementById("stopMining").addEventListener("click", () => {
-      if (!state.mining) {
-        alert("Sesi demo mining belum aktif.");
-        return;
-      }
-
-      state.miningElapsed = elapsedSeconds();
-      state.mining = false;
-      state.miningStartedAt = null;
-
-      if (timerHandle) {
-        clearInterval(timerHandle);
-        timerHandle = null;
-      }
-
-      saveState();
-    });
-
-    document.getElementById("saveWallet").addEventListener("click", () => {
-      state.wallet = document.getElementById("walletAddress").value.trim();
-      saveState();
-      document.getElementById("walletMessage").textContent =
-        "Alamat publik tersimpan di browser ini.";
-    });
-
-    document.getElementById("saveProfile").addEventListener("click", () => {
-      state.name = document.getElementById("profileName").value.trim();
-      state.email = document.getElementById("profileEmail").value.trim();
-      saveState();
-      document.getElementById("profileMessage").textContent =
-        "Profil tersimpan di browser ini.";
-    });
-
-    document.getElementById("copyReferral").addEventListener("click", async () => {
-      const message = document.getElementById("referralMessage");
-
-      try {
-        await navigator.clipboard.writeText(state.referral);
-        message.textContent = "Kode referral berhasil disalin.";
-      } catch (error) {
-        document.getElementById("referralCode").select();
-        message.textContent =
-          "Pilih kode di atas lalu salin secara manual.";
-      }
-    });
-
-    render();
-
-    if (state.mining) {
-      timerHandle = setInterval(render, 1000);
-    }
-  </script>
-</body>
-</html>
+drop function if exists register_referral(text, text);
+drop table if exists profiles cascade;
+
+create table profiles (
+  id uuid primary key default gen_random_uuid(),
+  token text unique not null default (replace(gen_random_uuid()::text,'-','') || replace(gen_random_uuid()::text,'-','')),
+  ref_code text unique not null,
+  name text not null default 'User Bitworld',
+  photo text,
+  referred_by uuid references profiles(id),
+  ref_count int not null default 0,
+  ref_bonus numeric not null default 0,
+  balance numeric not null default 0,
+  total_mined numeric not null default 0,
+  sessions_done int not null default 0,
+  mining_start timestamptz,
+  created_at timestamptz not null default now()
+);
+
+-- Tabel tidak bisa diakses langsung. Semua lewat fungsi di bawah.
+alter table profiles enable row level security;
+revoke all on profiles from anon, authenticated;
+
+create or replace function create_profile(p_ref text default null)
+returns table(out_token text, out_code text)
+language plpgsql security definer set search_path = public as $$
+declare
+  v_code text;
+  v_ref uuid;
+  v_token text;
+  chars text := 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  i int;
+begin
+  loop
+    v_code := 'BW';
+    for i in 1..6 loop
+      v_code := v_code || substr(chars, floor(random() * length(chars))::int + 1, 1);
+    end loop;
+    exit when not exists (select 1 from profiles p where p.ref_code = v_code);
+  end loop;
+
+  if p_ref is not null then
+    select p.id into v_ref from profiles p where p.ref_code = upper(trim(p_ref));
+  end if;
+
+  insert into profiles (ref_code, referred_by) values (v_code, v_ref)
+    returning profiles.token into v_token;
+
+  if v_ref is not null then
+    update profiles set ref_count = ref_count + 1 where id = v_ref;
+  end if;
+
+  return query select v_token, v_code;
+end $$;
+
+create or replace function get_profile(p_token text)
+returns json language sql stable security definer set search_path = public as $$
+  select json_build_object(
+    'ref_code', ref_code, 'name', name, 'photo', photo,
+    'ref_count', ref_count, 'ref_bonus', ref_bonus,
+    'balance', balance, 'total_mined', total_mined,
+    'sessions_done', sessions_done, 'mining_start', mining_start)
+  from profiles where token = p_token;
+$$;
+
+create or replace function update_profile(p_token text, p_name text, p_photo text)
+returns void language plpgsql security definer set search_path = public as $$
+begin
+  if p_photo is not null and length(p_photo) > 200000 then
+    raise exception 'Foto terlalu besar, pilih foto lain';
+  end if;
+  update profiles
+     set name = left(coalesce(nullif(trim(p_name), ''), 'User Bitworld'), 30),
+         photo = p_photo
+   where token = p_token;
+  if not found then raise exception 'Profil tidak ditemukan'; end if;
+end $$;
+
+create or replace function start_mining(p_token text)
+returns void language sql security definer set search_path = public as $$
+  update profiles set mining_start = coalesce(mining_start, now()) where token = p_token;
+$$;
+
+create or replace function cancel_mining(p_token text)
+returns void language sql security definer set search_path = public as $$
+  update profiles set mining_start = null where token = p_token;
+$$;
+
+create or replace function claim_mining(p_token text)
+returns numeric language plpgsql security definer set search_path = public as $$
+declare
+  r profiles%rowtype;
+  v_reward constant numeric := 0.048;
+  v_bonus numeric;
+begin
+  select * into r from profiles where token = p_token for update;
+  if not found or r.mining_start is null then return 0; end if;
+  if now() - r.mining_start < interval '24 hours' then return 0; end if;
+
+  update profiles
+     set balance = balance + v_reward,
+         total_mined = total_mined + v_reward,
+         sessions_done = sessions_done + 1,
+         mining_start = null
+   where id = r.id;
+
+  if r.referred_by is not null then
+    v_bonus := v_reward * 0.10;
+    update profiles
+       set balance = balance + v_bonus, ref_bonus = ref_bonus + v_bonus
+     where id = r.referred_by;
+  end if;
+
+  return v_reward;
+end $$;
+
+create or replace function my_referrals(p_token text)
+returns json language sql stable security definer set search_path = public as $$
+  select coalesce(json_agg(json_build_object('name', c.name, 'created_at', c.created_at)
+                  order by c.created_at desc), '[]'::json)
+  from profiles c
+  where c.referred_by = (select id from profiles where token = p_token);
+$$;
